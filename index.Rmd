@@ -1,7 +1,7 @@
 ---
-title: "My Website"
+title: "Joe DeCesaro"
 description: |
-  Welcome to the website. I hope you enjoy it!
+  Welcome! I am currently a graduate student at UCSB, check out some of my projects!
 site: distill::distill_website
 ---
 
