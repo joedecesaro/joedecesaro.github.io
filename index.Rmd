@@ -1,18 +1,17 @@
 ---
 title: "Joe DeCesaro"
-description: |
-  Welcome! I am currently a graduate student at UCSB, check out some of my projects!
+image: "joe.jpg"
+links:
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/joe-decesaro-b09419108/"
+  - label: GitHub
+    url: "https://github.com/joedecesaro"
+  - label: Email
+    url: "mailto:jdecesaro@bren.ucsb.edu"
+output:
+  postcards::jolla
 site: distill::distill_website
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-
-# Learn more about creating websites with Distill at:
-# https://rstudio.github.io/distill/website.html
-
-# Learn more about publishing to GitHub Pages at:
-# https://rstudio.github.io/distill/publish_website.html#github-pages
-
-```
+ 
+I am a student at the Bren school at UC Santa Barbara studying a masters in Environmental Data Science. I love surfing, soccer, and generally just spending time in the outdoors.
 
