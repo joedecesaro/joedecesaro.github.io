@@ -1,0 +1,10 @@
+---
+title: "CV"
+description: |
+  Check out some of my past work history.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
