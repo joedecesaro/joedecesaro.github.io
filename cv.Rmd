@@ -14,3 +14,4 @@ ggplot(data = diamonds, aes(x = carat, y = price)) +
   geom_point(aes(color = price))
 ```
 
+Hello I am Joe
