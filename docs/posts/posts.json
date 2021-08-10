@@ -1,0 +1,53 @@
+[
+  {
+    "path": "posts/2021-08-10-a-function-i-learned/",
+    "title": "The ggplot() Function",
+    "description": "A short summary of the `ggplot()` function within the tidyverse library.",
+    "author": [
+      {
+        "name": "Joe DeCesaro",
+        "url": {}
+      }
+    ],
+    "date": "2021-08-10",
+    "categories": [],
+    "contents": "\nThe ggplot() function:\nggplot() allows for the easy plotting of various types of graphic representations of data frames. These plots can start out as simple but can also be highly complex and customized. Below is an example of a simple point graph of data from the Palmer Penguins data set.\n\n\n\nNote that it is critical to specify the type of plot desired after the ggplot() function. Below is an example of using the\n\n\n\nstopped first draft here and will continue to discuss customization of graphs and other things with examples.\n\n\n\n",
+    "preview": "posts/2021-08-10-a-function-i-learned/images/yogi.jpg",
+    "last_modified": "2021-08-10T11:11:01-07:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/2021-08-10-hello/",
+    "title": "My first blog post!",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Joe DeCesaro",
+        "url": {}
+      }
+    ],
+    "date": "2021-08-10",
+    "categories": [],
+    "contents": "\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill at https://rstudio.github.io/distill.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-08-10T10:43:57-07:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/2021-08-10-test-image/",
+    "title": "Test Preview Image",
+    "description": "This is a post testing the \"preview\" function within the yml.",
+    "author": [
+      {
+        "name": "Joe DeCesaro",
+        "url": {}
+      }
+    ],
+    "date": "2021-08-10",
+    "categories": [],
+    "contents": "\n\n\n\n",
+    "preview": "posts/2021-08-10-test-image/images/adventure.jpg",
+    "last_modified": "2021-08-10T10:52:44-07:00",
+    "input_file": {}
+  }
+]
