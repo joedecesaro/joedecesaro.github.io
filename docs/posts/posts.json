@@ -11,43 +11,9 @@
     ],
     "date": "2021-08-10",
     "categories": [],
-    "contents": "\nThe ggplot() function:\nggplot() allows for the easy plotting of various types of graphic representations of data frames. These plots can start out as simple but can also be highly complex and customized. Below is an example of a simple point graph of data from the Palmer Penguins data set.\n\n\n\nNote that it is critical to specify the type of plot desired after the ggplot() function. Below is an example of using the\n\n\n\nstopped first draft here and will continue to discuss customization of graphs and other things with examples.\n\n\n\n",
-    "preview": "posts/2021-08-10-a-function-i-learned/images/yogi.jpg",
-    "last_modified": "2021-08-10T11:11:01-07:00",
-    "input_file": {}
-  },
-  {
-    "path": "posts/2021-08-10-hello/",
-    "title": "My first blog post!",
-    "description": "A short description of the post.",
-    "author": [
-      {
-        "name": "Joe DeCesaro",
-        "url": {}
-      }
-    ],
-    "date": "2021-08-10",
-    "categories": [],
-    "contents": "\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill at https://rstudio.github.io/distill.\n\n\n\n",
-    "preview": {},
-    "last_modified": "2021-08-10T10:43:57-07:00",
-    "input_file": {}
-  },
-  {
-    "path": "posts/2021-08-10-test-image/",
-    "title": "Test Preview Image",
-    "description": "This is a post testing the \"preview\" function within the yml.",
-    "author": [
-      {
-        "name": "Joe DeCesaro",
-        "url": {}
-      }
-    ],
-    "date": "2021-08-10",
-    "categories": [],
-    "contents": "\n\n\n\n",
-    "preview": "posts/2021-08-10-test-image/images/adventure.jpg",
-    "last_modified": "2021-08-10T10:52:44-07:00",
+    "contents": "\nThe basics of the ggplot() function:\nggplot() allows for the easy plotting of various types of graphic representations of data frames. These plots can start out as simple but can also be highly complex and customized. Below is an example of a simple point graph of data from the Palmer Penguins data set.\n\n\n\nNote that it is critical to specify the type of plot desired after the ggplot() function. Below is an example of using the geom_line() function where above uses the geom_point() function.\n\n\n\nLooking at the scatter plot above (not the line plot) does not provide much useful information from the data set. In data science it is important to call out specific groups within your data. In the Palmer Penguins data, three separate species of penguins are observed. Let’s take a look at how we can separate the data by species within the plot.\n\n\n\nBy seperating the data by species we can now clearly draw some distinct conclusions from the data for each species. For example, we know that Gentoo penguins will generally be the largest penguins.\nIt is always a good idea to take a look at your data BEFORE you begin working with it. By looking at the penguins data prior to plotting it, I would have known that there were three species within this data set and that I should probably have seperated them in the plot from the beginning.\nThis is a very brief introduction to the ggplot() function. Future posts will add to the foundations set in this introduciton.\n\n\n\n",
+    "preview": "posts/2021-08-10-a-function-i-learned/images/ggplot_ex.png",
+    "last_modified": "2021-08-16T16:56:11-07:00",
     "input_file": {}
   }
 ]
