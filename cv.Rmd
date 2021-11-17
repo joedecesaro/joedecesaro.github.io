@@ -1,17 +1,15 @@
 ---
-title: "CV"
+title: "Resume"
 description: |
-  Check out some of my past work history.
+  Below is a generalized version of my professional work history.
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 ```
 
 ```{r}
-ggplot(data = diamonds, aes(x = carat, y = price)) +
-  geom_point(aes(color = price))
+knitr::include_graphics("DeCesaro_Joe_Resume.pdf")
 ```
 
-Hello I am Joe
