@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 ```
 
-```{r}
+```{r, layout = "l-body-outset", fig.align='center', fig.width=8.5, fig.height=11}
 knitr::include_graphics("DeCesaro_Joe_Resume.pdf")
 ```
 
