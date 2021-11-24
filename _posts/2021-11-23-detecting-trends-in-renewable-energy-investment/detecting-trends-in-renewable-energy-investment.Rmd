@@ -33,6 +33,8 @@ This question is important to know for the future of climate change. As climate 
 
 ## Data 
 
+The data being used is annualized totals of investment for each data point and therefore does not have a seasonal component.
+
 ```{r}
 # Make file path for the data
 fp <- here("_posts/2021-11-23-detecting-trends-in-renewable-energy-investment/data/IRENA_RE_Public_Investment_July2021.xlsx")
@@ -45,29 +47,30 @@ fin_energy <- read_excel(fp)
 fin_energy <- fin_energy %>% 
   clean_names() 
 
-fin_energy <- fin_energy%>% 
-  select(iso_code:region, year:technology, amount_2019_usd_million)
+fin_energy <- fin_energy %>% 
+  select(iso_code:region, year:technology, amount_2019_usd_million) %>% 
+  filter(region != "Multilateral")
 ```
 
 ```{r}
 # Separate the data into the renewable and non-renewable investments
 
 renewable_fin <- fin_energy %>% 
-  filter(category == "Renewables")
+  filter(category == "Renewables") %>% 
+  group_by(country_area, region, year) %>% 
+  summarise(country_sum = sum(amount_2019_usd_million))
 
 non_renewable_fin <- fin_energy %>% 
-  filter(category =="Non-renewables")
+  filter(category =="Non-renewables") %>% 
+  group_by(country_area, region, year) %>% 
+  summarise(country_sum = sum(amount_2019_usd_million))
 ```
-
-
-```{r}
-ggplot(data = renewable_fin, aes(x = year, y = amount_2019_usd_million)) +
-  geom_point()
-```
-
-
 
 ## Analysis Plan
+
+First, a simple static time series model that will explore the effect of the year directly on the amount in investment in renewable energy. Essentially by running this simple model we are assuming that only the immediate year in question has an effect on the quantity of investment in renewable energy and investment in the past does not affect investment in the year in question. This simple model will then be compared to the investment in non-renewable energy sources over the same time period to compare investment trends.
+
+Second, a more complex model time series model will be made where we take the simple model  and see how it is affected when another variable is included. The variable we will explore is the regions of the world the data is separated into. This includes  Africa, Asia, Central America and Caribbean, Eurasia, Europe, Middle East, North America, Oceania, and South America.
 
 ## Results
 
