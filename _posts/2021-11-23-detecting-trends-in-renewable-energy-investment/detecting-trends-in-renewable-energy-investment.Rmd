@@ -1,0 +1,74 @@
+---
+title: "Detecting Trends in Renewable Energy Investment"
+description: |
+  A short description of the post.
+author:
+  - name: Joe DeCesaro
+    url: {}
+date: 11-23-2021
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(here)
+library(readxl)
+library(janitor)
+```
+
+
+# What is the trend of renewable energy investment over time?
+
+Implementation of renewable energy into electric grids around the world will be key to curbing the effects of climate change. Financial investment in large scale power plants has always had a long return on investment timeline. In the past, renewable energy technologies such as solar and wind have been expensive forms of generating electricity but, over the last ten years there has been a steep decline in their costs. From 2009 to 2019 the price of electricity from solar power has dropped 89% and the wind has dropped 70% (Roser, 2020). This begs the question, how is investment in renewable technologies changing over time? How does this compare to investment in non-renewable energy?
+
+This question is important to know for the future of climate change. As climate change becomes an ever more present and increasing threat, detecting these trends can tell us if our world is on the right track to reducing carbon emissions from energy generation. No doubt there is research into this topic in the public and private sector, however answers were not readily available when conducting research into this question. This blog post hopes to fill this void and provide insights into renewable energy investment trends over time. This post is by no means a comprehensive study, however it will provide some quick insights.
+
+## Data 
+
+```{r}
+# Make file path for the data
+fp <- here("_posts/2021-11-23-detecting-trends-in-renewable-energy-investment/data/IRENA_RE_Public_Investment_July2021.xlsx")
+
+# Read in the data using the readxl package
+fin_energy <- read_excel(fp)
+```
+```{r}
+# Clean the data to remove fields that are not needed
+fin_energy <- fin_energy %>% 
+  clean_names() 
+
+fin_energy <- fin_energy%>% 
+  select(iso_code:region, year:technology, amount_2019_usd_million)
+```
+
+```{r}
+# Separate the data into the renewable and non-renewable investments
+
+renewable_fin <- fin_energy %>% 
+  filter(category == "Renewables")
+
+non_renewable_fin <- fin_energy %>% 
+  filter(category =="Non-renewables")
+```
+
+
+```{r}
+ggplot(data = renewable_fin, aes(x = year, y = amount_2019_usd_million)) +
+  geom_point()
+```
+
+
+
+## Analysis Plan
+
+## Results
+
+## Next Steps
