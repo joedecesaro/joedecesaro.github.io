@@ -1,5 +1,5 @@
 ---
-title: "Detecting Trends in Renewable Energy Investment"
+title: "Regional Trends in Renewable Energy Investment"
 description: |
   A short description of the post.
 author:
@@ -73,5 +73,59 @@ First, a simple static time series model that will explore the effect of the yea
 Second, a more complex model time series model will be made where we take the simple model  and see how it is affected when another variable is included. The variable we will explore is the regions of the world the data is separated into. This includes  Africa, Asia, Central America and Caribbean, Eurasia, Europe, Middle East, North America, Oceania, and South America.
 
 ## Results
+
+```{r}
+# lets make our model for renewable energy
+model_renew <- lm(country_sum ~ year, data = renewable_fin)
+
+summary(model_renew)
+
+```
+
+```{r}
+# lets make a model for non-renewables
+model_non_renew <- lm(country_sum ~ year, data = non_renewable_fin)
+
+summary(model_non_renew)
+```
+
+```{r}
+# model for renewables for by region
+region_renewable_fin <- renewable_fin %>% 
+  group_by(region, year) %>% 
+  summarise(region_sum = sum(country_sum))
+
+region_model <-  lm(region_sum ~ year + region:year, data = region_renewable_fin)
+summary(region_model)
+```
+
+
+### Plots
+```{r}
+# simple plot with the model for renewables
+plot_renewable <- ggplot(data = region_renewable_fin, aes(x = year, y = region_sum)) +
+  geom_point(size = 2,
+             alpha = 0.3) +
+  geom_smooth(data = region_renewable_fin,
+              method = lm, 
+              formula = region_sum ~ year + year:region,
+              color = "skyblue")
+
+plot_renewable
+```
+```{r}
+# simple plot with the model for renewables
+plot_non_renewable <- ggplot(data = non_renewable_fin, aes(x = year, y = country_sum)) +
+  geom_point(size = 2,
+             alpha = 0.3) +
+  geom_smooth(method = lm, 
+              formula = y~x,
+              color = "skyblue")
+
+plot_non_renewable
+```
+
+
+
 
 ## Next Steps
