@@ -47,6 +47,7 @@ fin_energy <- read_excel(fp)
 fin_energy <- fin_energy %>% 
   clean_names() 
 
+# Remove unnecessary columns and the "multilateral" region 
 fin_energy <- fin_energy %>% 
   select(iso_code:region, year:technology, amount_2019_usd_million) %>% 
   filter(region != "Multilateral")
@@ -74,13 +75,20 @@ Second, a more complex model time series model will be made where we take the si
 
 ## Results
 
+### Simple Renewable Investment Trend Model
 ```{r}
-# lets make our model for renewable energy
+# Lets make our simple model for renewable energy
 model_renew <- lm(country_sum ~ year, data = renewable_fin)
 
 summary(model_renew)
-
 ```
+Using the `summary()` function, we can quickly get some insights from our model. From this output we are most concerned with the coefficient estimate of the year, which is **8.269 million USD**. This tells us that, according to this model, with each passing year we are seeing a increase in renewable investment by **$8,269,000** USD by each country per year. Overall this is a positive trend for renewable investments year over year by each country.
+
+From the `summary()` function we are also able to get a p-value for the trend coefficient. The p-value is represented in the "Coefficients" section of the table under "Pr(>|t|)". The year coefficient has a p-value below **0.001** which gives us confidence in rejecting a null hypothesis that there is no relationship between investment sums across time with a confidence interval of 0.05. It should be noted that our R-squared value is low for this model **(0.01)** however that is not important for this analysis as we are not focused on predicting outcomes of investment with high precision, but rather the overall trend from the year coefficient and its' associated p-value.
+
+Now that we can see that there is a positive trend in renewable investments, lets compare that to non-renewable investment.
+
+### Simple Non-renewable Investment Model
 
 ```{r}
 # lets make a model for non-renewables
@@ -88,13 +96,19 @@ model_non_renew <- lm(country_sum ~ year, data = non_renewable_fin)
 
 summary(model_non_renew)
 ```
+From the `summary()` of this model we can see that by country there is also a positive trend of non-renewable investment by country...
 
+**Will this be necessary? I think comparing regional invesment will be more interesting so I will do that first**
+
+### Regional Renewable Investment
 ```{r}
-# model for renewables for by region
+# Make data table for renewables for by region, relevel with North America as first to compare our region to the rest of the world
 region_renewable_fin <- renewable_fin %>% 
   group_by(region, year) %>% 
-  summarise(region_sum = sum(country_sum))
+  summarise(region_sum = sum(country_sum)) %>% 
+  mutate(region = relevel(region, ref = "7"))
 
+# Make the regional investment model
 region_model <-  lm(region_sum ~ year + region:year, data = region_renewable_fin)
 summary(region_model)
 ```
