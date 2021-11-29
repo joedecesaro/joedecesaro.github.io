@@ -55,7 +55,6 @@ fin_energy <- fin_energy %>%
 
 ```{r}
 # Separate the data into the renewable and non-renewable investments
-
 renewable_fin <- fin_energy %>% 
   filter(category == "Renewables") %>% 
   group_by(country_area, region, year) %>% 
@@ -67,24 +66,37 @@ non_renewable_fin <- fin_energy %>%
   summarise(country_sum = sum(amount_2019_usd_million))
 ```
 
+```{r}
+# Make data table for renewables for by region
+region_renewable_fin <- renewable_fin %>% 
+  group_by(region, year) %>% 
+  summarise(region_sum = sum(country_sum))
+
+# Make data table for non-renewables for by region
+region_non_renewable_fin <- non_renewable_fin %>% 
+  group_by(region, year) %>% 
+  summarise(region_sum = sum(country_sum))
+```
+
 ## Analysis Plan
 
-First, a simple static time series model will explore the overall trend of the total annual amount invested in renewable energy. By running this simple model we can get a quick glimpse into the global trend of renewable investment. This assumes that only the immediate year in question has an effect on the quantity of investment. This will then be compared to the trend in non-renewable energy source investment over the same time period.
+First, a simple static time series model will explore the overall trend of the total annual amount invested in renewable energy by region. Regions are broken into Africa, Asia, Central America and the Caribbean, Eurasia, Europe, Middle East, Oceania, and South America.  By running this simple model we can get a quick glimpse into the global trend of renewable investment. This assumes that only the immediate year in question has an effect on the quantity of investment. This will then be compared to the trend in non-renewable energy source investment over the same time period.
 
-Second, a more complex model time series model will be made where we take the simple model and break it up by regional heterogeneity to produce a interaction model. As mentioned earlier, it is no secret that change usually occurs where money flows. Our general trend in investment from the first model is important as climate change is a global issue and it provides us with a quick insight into how the world is fairing as a whole. However, with agreements like The Paris Agreement we know it will take each country's and region's participation to minimize and eventually reverse the effects of climate change. With this in mind, the simple model produced earlier could hide that certain regions are regressing in investment while larger investments in other regions push the overall trend positive. If regions are truly committed to curbing climate change our model will show an overall positive trend. This evaluation will serve as a litmus test to see regional commitment to global climate agreements. Finally, regional renewable trends will then be compared to their non-renewable counterparts.
+Second, a more complex model time series model will be made where we take the simple model and break it up by regional heterogeneity to produce an interaction model. As mentioned earlier, it is no secret that change usually occurs where money flows. Our general trend in investment from the first model is important as climate change is a global issue and it provides us with a quick insight into how the world is fairing as a whole. However, with agreements like The Paris Agreement we know it will take each country's and region's participation to minimize and eventually reverse the effects of climate change. With this in mind, the simple model produced earlier could hide that certain regions are regressing in investment while larger investments in other regions push the overall trend positive. If regions are truly committed to curbing climate change our model will show an overall positive trend. This evaluation will serve as a litmus test to see regional commitment to global climate agreements. Finally, regional renewable trends will then be compared to their non-renewable counterparts.
 
 ## Results
 
 ### Simple Renewable Investment Trend Model
 ```{r}
 # Lets make our simple model for renewable energy
-model_renew <- lm(country_sum ~ year, data = renewable_fin)
+model_renew <- lm(region_sum ~ year, data = region_renewable_fin)
 
-summary(model_renew)
+summary_model_renew <- summary(model_renew)
+summary_model_renew
 ```
-Using the `summary()` function, we can quickly get some insights from our model. From this output we are most concerned with the coefficient estimate of the year, which is **8.269 million USD**. This tells us that, according to this model, with each passing year we are seeing a increase in renewable investment by **$8,269,000** USD by each country per year. Overall this is a positive trend for renewable investments year over year by each country.
+Using the `summary()` function, we can quickly get some insights from our model. From this output we are most concerned with the coefficient estimate of the year, which is `r round(summary_model_renew$coefficients[2,"Estimate"], 2)` million USD. This tells us that, according to this model, with each passing year we are seeing a increase in renewable investment by more than 141,000,000 USD across each region per year. Overall this is a positive trend for renewable investments year over year.
 
-From the `summary()` function we are also able to get a p-value for the trend coefficient. The p-value is represented in the "Coefficients" section of the table under "Pr(>|t|)". The year coefficient has a p-value below **0.001** which gives us confidence in rejecting a null hypothesis that there is no relationship between investment sums across time with a confidence interval of 0.05. It should be noted that our R-squared value is low for this model **(0.01)** however that is not important for this analysis as we are not focused on predicting outcomes of investment with high precision, but rather the overall trend from the year coefficient and its' associated p-value.
+From the `summary()` function we are also able to get a p-value for the trend coefficient. The p-value is represented in the "Coefficients" section of the table under "Pr(>|t|)". The year coefficient has a p-value below 0.001 which gives us confidence in rejecting a null hypothesis that there is no relationship between investment sums across time with a confidence interval of 0.001. It should be noted that our R-squared value for this model is 0.13 however that is not important for this analysis as we are not focused on predicting outcomes of investment with high precision, but rather the overall trend from the year coefficient and its' associated p-value.
 
 Now that we can see that there is a positive trend in renewable investments, lets compare that to non-renewable investment.
 
@@ -92,27 +104,70 @@ Now that we can see that there is a positive trend in renewable investments, let
 
 ```{r}
 # lets make a model for non-renewables
-model_non_renew <- lm(country_sum ~ year, data = non_renewable_fin)
+model_non_renew <- lm(region_sum ~ year, data = region_non_renewable_fin)
 
-summary(model_non_renew)
+summary_model_non_renew <- summary(model_non_renew)
+summary_model_non_renew
 ```
-From the `summary()` of this model we can see that by country there is also a positive trend of non-renewable investment by country...
+From the `summary()` of this model we can see that by country there is also a positive trend of non-renewable investment across regions. According to this model there is an increase in non-renewable investments by `r round(summary_model_non_renew$coefficients[2,"Estimate"], 2)` million USD. With a p-value of 0.005 can confidently reject a null hypothesis of there being no relationship between non-renewable investment over time.
 
-**Will this be necessary? I think comparing regional invesment will be more interesting so I will do that first**
+According to these two simple models, there is a larger increase in renewable investments year over year compared to non-renewables. As this data is only from the years 2000-2020 these investment trends do not reflect the historical investments in non-renewable energy sources. As this simple regression only looks at the trend over time we will now see how these investment trends compare across regions. In the original model outlier regional trends could be affecting our simple investment trend.
 
 ### Regional Renewable Investment
 ```{r}
-# Make data table for renewables for by region, relevel with North America as first to compare our region to the rest of the world
-region_renewable_fin <- renewable_fin %>% 
-  group_by(region, year) %>% 
-  summarise(region_sum = sum(country_sum)) %>% 
-  mutate(region = relevel(region, ref = "7"))
+# Make levels for regions with North America as first to compare our region to the rest of the world
+region_renewable_fin$region <- factor(region_renewable_fin$region, levels = c("North America", "Africa", "Asia", "Central America and the Caribbean", "Eurasia", "Europe", "Middle East", "Oceania", "South America"))
 
 # Make the regional investment model
 region_model <-  lm(region_sum ~ year + region:year, data = region_renewable_fin)
-summary(region_model)
+region_renew_model_summary <- summary(region_model)
+region_renew_model_summary
+```
+```{r}
+# Making the results a summary table
+summary_renew_region_table <- data.frame(Region = c("North America", 
+                                                      "Africa", 
+                                                      "Asia", 
+                                                      "Central America and the Caribbean", 
+                                                      "Eurasia", 
+                                                      "Europe", 
+                                                      "Middle East", 
+                                                      "Oceania", 
+                                                      "South America"), 
+                                         Change_in_Annual_Investment_million_USD = c(region_model_summary$coefficients[2,"Estimate"], 
+                                                                                         region_model_summary$coefficients[2,"Estimate"] + region_model_summary$coefficients[3,"Estimate"],
+                                                                                         region_model_summary$coefficients[2,"Estimate"] + region_model_summary$coefficients[4,"Estimate"],
+                                                                                         region_model_summary$coefficients[2,"Estimate"] + region_model_summary$coefficients[5,"Estimate"],
+                                                                                         region_model_summary$coefficients[2,"Estimate"] + region_model_summary$coefficients[6,"Estimate"],
+                                                                                         region_model_summary$coefficients[2,"Estimate"] + region_model_summary$coefficients[7,"Estimate"],
+                                                                                         region_model_summary$coefficients[2,"Estimate"] + region_model_summary$coefficients[8,"Estimate"],
+                                                                                         region_model_summary$coefficients[2,"Estimate"] + region_model_summary$coefficients[9,"Estimate"],
+                                                                                         region_model_summary$coefficients[2,"Estimate"] + region_model_summary$coefficients[10,"Estimate"]),
+                                         p_value = c(region_model_summary$coefficients[2,"Estimate"], 
+                                                                                         region_model_summary$coefficients[2,"Pr(>|t|)"],
+                                                                                         region_model_summary$coefficients[4,"Pr(>|t|)"],
+                                                                                         region_model_summary$coefficients[5,"Pr(>|t|)"],
+                                                                                         region_model_summary$coefficients[6,"Pr(>|t|)"],
+                                                                                         region_model_summary$coefficients[7,"Pr(>|t|)"],
+                                                                                         region_model_summary$coefficients[8,"Pr(>|t|)"],
+                                                                                         region_model_summary$coefficients[9,"Pr(>|t|)"],
+                                                                                         region_model_summary$coefficients[10,"Pr(>|t|)"])
+)
 ```
 
+
+Discuss results...
+
+
+```{r}
+# Make levels for regions with North America as first to compare our region to the rest of the world
+region_non_renewable_fin$region <- factor(region_non_renewable_fin$region, levels = c("North America", "Africa", "Asia", "Central America and the Caribbean", "Eurasia", "Europe", "Middle East", "Oceania", "South America"))
+
+# Make the regional investment model
+region_non_renewable_model <-  lm(region_sum ~ year + region:year, data = region_non_renewable_fin)
+region_non_renewable_model_summary <- summary(region_non_renewable_model)
+region_non_renewable_model_summary
+```
 
 ### Plots
 ```{r}
