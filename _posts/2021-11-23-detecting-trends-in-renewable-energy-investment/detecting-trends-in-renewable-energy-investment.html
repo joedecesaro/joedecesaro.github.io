@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data/IRENA_RE_Public_Investment_July2021.xlsx","detecting-trends-in-renewable-energy-investment_files/anchor-4.2.2/anchor.min.js","detecting-trends-in-renewable-energy-investment_files/bowser-1.9.3/bowser.min.js","detecting-trends-in-renewable-energy-investment_files/distill-2.2.21/template.v2.js","detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-10-1.png","detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-11-1.png","detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-12-1.png","detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-5-1.png","detecting-trends-in-renewable-energy-investment_files/header-attrs-2.10/header-attrs.js","detecting-trends-in-renewable-energy-investment_files/jquery-1.11.3/jquery.min.js","detecting-trends-in-renewable-energy-investment_files/popper-2.6.0/popper.min.js","detecting-trends-in-renewable-energy-investment_files/tippy-6.2.7/tippy-bundle.umd.min.js","detecting-trends-in-renewable-energy-investment_files/tippy-6.2.7/tippy-light-border.css","detecting-trends-in-renewable-energy-investment_files/tippy-6.2.7/tippy.css","detecting-trends-in-renewable-energy-investment_files/tippy-6.2.7/tippy.umd.min.js","detecting-trends-in-renewable-energy-investment_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/IRENA_RE_Public_Investment_July2021.xlsx","detecting-trends-in-renewable-energy-investment_files/anchor-4.2.2/anchor.min.js","detecting-trends-in-renewable-energy-investment_files/bowser-1.9.3/bowser.min.js","detecting-trends-in-renewable-energy-investment_files/distill-2.2.21/template.v2.js","detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-10-1.png","detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-11-1.png","detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-12-1.png","detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-13-1.png","detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-5-1.png","detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-8-1.png","detecting-trends-in-renewable-energy-investment_files/header-attrs-2.10/header-attrs.js","detecting-trends-in-renewable-energy-investment_files/jquery-1.11.3/jquery.min.js","detecting-trends-in-renewable-energy-investment_files/popper-2.6.0/popper.min.js","detecting-trends-in-renewable-energy-investment_files/tippy-6.2.7/tippy-bundle.umd.min.js","detecting-trends-in-renewable-energy-investment_files/tippy-6.2.7/tippy-light-border.css","detecting-trends-in-renewable-energy-investment_files/tippy-6.2.7/tippy.css","detecting-trends-in-renewable-energy-investment_files/tippy-6.2.7/tippy.umd.min.js","detecting-trends-in-renewable-energy-investment_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1523,32 +1523,35 @@ Residual standard error: 2167 on 184 degrees of freedom
 Multiple R-squared:  0.1341,    Adjusted R-squared:  0.1294 
 F-statistic:  28.5 on 1 and 184 DF,  p-value: 2.735e-07</code></pre>
 </div>
-<p>Using the <code>summary()</code> function, we can quickly get some insights from our model. From this output we are most concerned with the coefficient estimate of the year, which is 141.88 million USD. This tells us that, according to this model, with each passing year we are seeing a increase in renewable investment by 1.4188086^{8} USD by each country per year. Overall this is a positive trend for renewable investments year over year by each country.</p>
-<p>From the <code>summary()</code> function we are also able to get a p-value for the trend coefficient. The p-value is represented in the “Coefficients” section of the table under “Pr(&gt;|t|)”. The year coefficient has a p-value below <strong>0.001</strong> which gives us confidence in rejecting a null hypothesis that there is no relationship between investment sums across time with a confidence interval of 0.05. It should be noted that our R-squared value is low for this model <strong>(0.01)</strong> however that is not important for this analysis as we are not focused on predicting outcomes of investment with high precision, but rather the overall trend from the year coefficient and its’ associated p-value.</p>
+<p>Using the <code>summary()</code> function, we can quickly get some insights from our model. From this output we are most concerned with the coefficient estimate of the year, which is 141.88 million USD. This tells us that, according to this model, with each passing year we are seeing a increase in renewable investment by more than 141,000,000 USD across each region per year. Overall this is a positive trend for renewable investments year over year.</p>
+<p>From the <code>summary()</code> function we are also able to get a p-value for the trend coefficient. The p-value is represented in the “Coefficients” section of the table under “Pr(&gt;|t|)”. The year coefficient has a p-value below 0.001 which gives us confidence in rejecting a null hypothesis that there is no relationship between investment sums across time with a confidence interval of 0.001. It should be noted that our R-squared value for this model is 0.13 however that is not important for this analysis as we are not focused on predicting outcomes of investment with high precision, but rather the overall trend from the year coefficient and its’ associated p-value.</p>
 <p>Now that we can see that there is a positive trend in renewable investments, lets compare that to non-renewable investment.</p>
 <h3 id="simple-non-renewable-investment-model">Simple Non-renewable Investment Model</h3>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>
 Call:
-lm(formula = country_sum ~ year, data = non_renewable_fin)
+lm(formula = region_sum ~ year, data = region_non_renewable_fin)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
- -378.6  -259.6  -182.9   -76.5 19852.6 
+-2660.1 -1457.2  -796.8   -24.5 18677.7 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept) -32474.98   11136.45  -2.916  0.00361 **
-year            16.26       5.54   2.936  0.00339 **
+              Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept) -218612.31   77728.01  -2.813  0.00549 **
+year            109.54      38.67   2.833  0.00518 **
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 1027 on 1213 degrees of freedom
-Multiple R-squared:  0.007056,  Adjusted R-squared:  0.006237 
-F-statistic: 8.619 on 1 and 1213 DF,  p-value: 0.003389</code></pre>
+Residual standard error: 2974 on 170 degrees of freedom
+Multiple R-squared:  0.04507,   Adjusted R-squared:  0.03945 
+F-statistic: 8.023 on 1 and 170 DF,  p-value: 0.005176</code></pre>
 </div>
-<p>From the <code>summary()</code> of this model we can see that by country there is also a positive trend of non-renewable investment by country…</p>
-<p><strong>Will this be necessary? I think comparing regional invesment will be more interesting so I will do that first</strong></p>
+<p>From the <code>summary()</code> of this model we can see that by country there is also a positive trend of non-renewable investment across regions. According to this model there is an increase in non-renewable investments by 109.54 million USD. With a p-value of 0.005 can confidently reject a null hypothesis of there being no relationship between non-renewable investment over time. According to these two simple models, there is a larger increase in renewable investments year over year compared to non-renewables. Below is a plot that compares renewable and non-renewable investments over time, along with their respective models.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
+</div>
+<p>As this data is only from the years 2000-2020 these investment trends do not reflect the historical investments in non-renewable energy sources. As this simple regression only looks at the trend over time we will now see how these investment trends compare across regions. In the original model outlier regional trends could be affecting our simple investment trend.</p>
 <h3 id="regional-renewable-investment">Regional Renewable Investment</h3>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>
@@ -1634,10 +1637,10 @@ F-statistic: 6.233 on 9 and 162 DF,  p-value: 1.538e-07</code></pre>
 </div>
 <h3 id="plots">Plots</h3>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-11-1.png" width="624" /></p>
+<p><img src="detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
+<p><img src="detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-13-1.png" width="624" /></p>
 </div>
 <h2 id="next-steps">Next Steps</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
