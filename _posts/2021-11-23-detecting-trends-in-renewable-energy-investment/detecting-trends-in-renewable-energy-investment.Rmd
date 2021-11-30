@@ -22,12 +22,16 @@ library(tidyverse)
 library(here)
 library(readxl)
 library(janitor)
+library(broom)
+library(sjPlot)
+library(paletteer)
+library(kableExtra)
 ```
 
 
 # What is the trend of renewable energy investment over time?
 
-Implementation of renewable energy into electric grids around the world will be key to curbing the effects of climate change. Financial investment in large scale power plants has always had a long return on investment timeline. In the past, renewable energy technologies such as solar and wind have been expensive forms of generating electricity but, over the last ten years there has been a steep decline in their costs. From 2009 to 2019 the price of electricity from solar power has dropped 89% and the wind has dropped 70% (Roser, 2020). This begs the question, how is investment in renewable technologies changing over time? How does this compare to investment in non-renewable energy?
+Implementation of renewable energy into electric grids around the world will be key to curbing the effects of climate change. It is no secret that change usually occurs where money flows. In the past, renewable energy technologies such as solar and wind have been expensive forms of generating electricity but, over the last ten years there has been a steep decline in their costs. From 2009 to 2019 the price of electricity from solar power has dropped 89% and the wind has dropped 70% (Roser, 2020). This begs the question, how is investment in renewable technologies changing over time? How does this compare to investment in non-renewable energy?
 
 This question is important to know for the future of climate change. As climate change becomes an ever more present and increasing threat, detecting these trends can tell us if our world is on the right track to reducing carbon emissions from energy generation. No doubt there is research into this topic in the public and private sector, however answers were not readily available when conducting research into this question. This blog post hopes to fill this void and provide insights into renewable energy investment trends over time. This post is by no means a comprehensive study, however it will provide some quick insights.
 
@@ -82,7 +86,7 @@ region_non_renewable_fin <- non_renewable_fin %>%
 
 First, a simple static time series model will explore the overall trend of the total annual amount invested in renewable energy by region. Regions are broken into Africa, Asia, Central America and the Caribbean, Eurasia, Europe, Middle East, Oceania, and South America.  By running this simple model we can get a quick glimpse into the global trend of renewable investment. This assumes that only the immediate year in question has an effect on the quantity of investment. This will then be compared to the trend in non-renewable energy source investment over the same time period.
 
-Second, a more complex model time series model will be made where we take the simple model and break it up by regional heterogeneity to produce an interaction model. As mentioned earlier, it is no secret that change usually occurs where money flows. Our general trend in investment from the first model is important as climate change is a global issue and it provides us with a quick insight into how the world is fairing as a whole. However, with agreements like The Paris Agreement we know it will take each country's and region's participation to minimize and eventually reverse the effects of climate change. With this in mind, the simple model produced earlier could hide that certain regions are regressing in investment while larger investments in other regions push the overall trend positive. If regions are truly committed to curbing climate change our model will show an overall positive trend. This evaluation will serve as a litmus test to see regional commitment to global climate agreements. Finally, regional renewable trends will then be compared to their non-renewable counterparts.
+Second, a more complex model time series model will be made where we take the simple model and break it up by regional heterogeneity to produce an interaction model. As mentioned earlier, it is no secret that change usually occurs where money flows. Our first trend model provides us with a quick insight into how the world is investing as a whole. However, with agreements like The Paris Agreement we know it will take each country's and region's participation to minimize and eventually reverse the effects of climate change. With this in mind, the simple model produced earlier hides that certain regions are committing greater investments than other regions. If regions are truly committed to curbing climate change our model will show an overall positive trend. This evaluation will serve as a litmus test to see regional commitment to global climate agreements. Finally, regional renewable trends will then be compared to their non-renewable counterparts.
 
 ## Results
 ### Simple Renewable Investment Trend Model
@@ -93,9 +97,14 @@ model_renew <- lm(region_sum ~ year, data = region_renewable_fin)
 summary_model_renew <- summary(model_renew)
 summary_model_renew
 ```
-Using the `summary()` function, we can quickly get some insights from our model. From this output we are most concerned with the coefficient estimate of the year, which is `r round(summary_model_renew$coefficients[2,"Estimate"], 2)` million USD. This tells us that, according to this model, with each passing year we are seeing a increase in renewable investment by more than 141,000,000 USD across each region per year. Overall this is a positive trend for renewable investments year over year.
+```{r}
+# Test for tab_model to determine if it is better to use
+tab_model(model_renew, title = "Effect of Time on Renewable Investment")
+```
 
-From the `summary()` function we are also able to get a p-value for the trend coefficient. The p-value is represented in the "Coefficients" section of the table under "Pr(>|t|)". The year coefficient has a p-value below 0.001 which gives us confidence in rejecting a null hypothesis that there is no relationship between investment sums across time with a confidence interval of 0.001. It should be noted that our R-squared value for this model is 0.13 however that is not important for this analysis as we are not focused on predicting outcomes of investment with high precision, but rather the overall trend from the year coefficient and its' associated p-value.
+Using the `summary()` function, we can quickly get some insights from our model. From the output above we are most concerned with the coefficient estimate of the year, which is `r round(summary_model_renew$coefficients[2,"Estimate"], 2)` million USD. This tells us that, according to this model, with each passing year we are seeing a increase in renewable investment by more than 142,000,000 USD across each region per year. Overall this is a positive trend for renewable investments year over year.
+
+From the `summary()` function we are also able to get a p-value for the trend coefficient. The p-value is represented in the "Coefficients" section of the table under "Pr(>|t|)". The year coefficient has a p-value below 0.001 which gives us confidence in rejecting a null hypothesis that there is no relationship between investment sums across time with a significance level of 0.05. It should be noted that our R-squared value for this model is 0.13 however that is not important for this analysis as we are not focused on predicting outcomes of investment with high precision, but rather the overall trend from the year coefficient and its' associated p-value.
 
 Now that we can see that there is a positive trend in renewable investments, lets compare that to non-renewable investment.
 
@@ -107,32 +116,41 @@ model_non_renew <- lm(region_sum ~ year, data = region_non_renewable_fin)
 summary_model_non_renew <- summary(model_non_renew)
 summary_model_non_renew
 ```
-From the `summary()` of this model we can see that by country there is also a positive trend of non-renewable investment across regions. According to this model there is an increase in non-renewable investments by `r round(summary_model_non_renew$coefficients[2,"Estimate"], 2)` million USD. With a p-value of 0.005 can confidently reject a null hypothesis of there being no relationship between non-renewable investment over time. According to these two simple models, there is a larger increase in renewable investments year over year compared to non-renewables. Below is a plot that compares renewable and non-renewable investments over time, along with their respective models.
+From the `summary()` of this model we can see that by country there is also a positive trend of non-renewable investment across regions. According to this model there is an increase in non-renewable investments by `r round(summary_model_non_renew$coefficients[2,"Estimate"], 2)` million USD. With a p-value of 0.005 can confidently reject a null hypothesis of there being no relationship between non-renewable investment over time with a significance level of 0.05. According to these two simple models, there is a larger increase in renewable investments year over year compared to non-renewables but as the standard errors for the models overlap this is not conclusive and this blog post will not be pursuing this question. Below is a plot that compares renewable and non-renewable investments over time, along with their respective models.
 
 ```{r}
 simple_model_plot <- ggplot(data = region_renewable_fin, 
                             aes(x = year, y = region_sum)) + 
   geom_point(color = "darkgreen", 
              alpha = 0.8) + 
+  geom_line(data = augment(model_renew), 
+             aes( y = .fitted), 
+             color = "darkgreen") +
   geom_point(data = region_non_renewable_fin, 
              aes(x = year, y = region_sum), 
              color = "tan3",
              alpha = 0.8) +
+    geom_line(data = augment(model_non_renew), 
+             aes( y = .fitted), 
+             color = "tan3") +
   labs(caption = "Renewable investments from 2000-2020 are increasing at a rate of 141 million USD per year according to this model.\n Non-renewable invesments over the same time period are increasing at a rate of 110 million USD per year.", 
        title = "Comparing Investment Renewable and Non-Renewable Energy Investment
-Across Regions") +
+Across Regional Sums") +
   xlab(label = "Year") +
   ylab(label = "Annual Regional Sum of Investment (million USD)") +
-  theme_bw()
+  theme_bw() +
+  scale_color_discrete(name = "Energy Source", 
+                       breaks = c("Renewables", "Non-Renewables"),
+                       labels = c("Renewables", "Non-Renewables"))
   
 simple_model_plot
 ```
 
-
-
-As this data is only from the years 2000-2020 these investment trends do not reflect the historical investments in non-renewable energy sources. As this simple regression only looks at the trend over time we will now see how these investment trends compare across regions. In the original model outlier regional trends could be affecting our simple investment trend.
+It can be observed from the graph that there has been significant investment in renewable (green) and non-renewable (tan) energy projects since the 2008 recession. The plot illustrates just how much variance there is in investment totals across regions in each year. As discussed above the plot does show that there is a larger investment in renewables year-over-year. As this data is only from the years 2000-2020 these investment trends do not reflect the historical investments in non-renewable energy sources. As this simple regression only looks at the trend over time we will now see how these investment trends compare across regions. In the original model outlier regional trends could be affecting our simple investment trend.
 
 ### Regional Renewable Investment
+Below the same `summary()` function is used to quickly provide some summary statistics for the interaction regression of time and region on renewable investment trends. In the model the North American region was set as the base level of the regression. This was done because North America contains the United States, the country with the largest GDP in the world and therefore a significant marker to compare other regions to it.
+
 ```{r}
 # Make levels for regions with North America as first to compare our region to the rest of the world
 region_renewable_fin$region <- factor(region_renewable_fin$region, levels = c("North America", "Africa", "Asia", "Central America and the Caribbean", "Eurasia", "Europe", "Middle East", "Oceania", "South America"))
@@ -142,6 +160,8 @@ region_model <-  lm(region_sum ~ year + region:year, data = region_renewable_fin
 region_renew_model_summary <- summary(region_model)
 region_renew_model_summary
 ```
+From the summary intercept estimates, only Oceania is investing less per year than North America. However, the p-value for the Oceania region is greater than the significance level of 0.05 and therefore we cannot say its represented rate of renewable investment is statistically significant and we fail to reject a null hypothesis that there is no difference in investment over time. As useful as the `summary()` function is, it is not easy to compare regional investment trends with it so the below table was made to show each reagions rate of renewable investment according to this model and its corresponding p-value. 
+
 ```{r}
 # Making the results a summary table
 summary_renew_region_table <- data.frame(Region = c("North America", 
@@ -171,12 +191,36 @@ summary_renew_region_table <- data.frame(Region = c("North America",
                                                                                          region_renew_model_summary$coefficients[8,"Pr(>|t|)"],
                                                                                          region_renew_model_summary$coefficients[9,"Pr(>|t|)"],
                                                                                          region_renew_model_summary$coefficients[10,"Pr(>|t|)"])
-)
+) %>% 
+  mutate(Renewable_Investment = round(Renewable_Investment, 2))
+
+summary_renew_region_table %>% 
+  kable(col.names = c("Region", "Renewable Investment per Year (million USD)", "p-value")) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE)
+```
+From this table we can observe that the projected investment rates per year are quite similar
+
+
+```{r}
+# Plotting the regional model
+regional_model_plot <- ggplot(data = region_renewable_fin, 
+                            aes(x = year, y = region_sum, color = region)) + 
+  geom_point() + 
+  geom_line(data = augment(region_model), 
+             aes(y = .fitted)) + 
+  scale_color_paletteer_d("colorBlindness::paletteMartin") 
+
+#   labs(caption = "Renewable investments from 2000-2020 are increasing at a rate of 141 million USD per year according to this model.\n Non-renewable invesments over the same time period are increasing at a rate of 110 million USD per year.", 
+#        title = "Comparing Investment Renewable and Non-Renewable Energy Investment
+# Across Regional Sums") +
+#   xlab(label = "Year") +
+#   ylab(label = "Annual Regional Sum of Investment (million USD)") +
+#   theme_bw()
+  
+regional_model_plot
 ```
 
-
 Discuss results...
-
 
 ```{r}
 # Make levels for regions with North America as first to compare our region to the rest of the world
