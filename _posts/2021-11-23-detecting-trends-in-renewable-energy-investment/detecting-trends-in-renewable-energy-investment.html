@@ -1668,7 +1668,7 @@ Residual standard error: 1702 on 176 degrees of freedom
 Multiple R-squared:  0.4888,    Adjusted R-squared:  0.4627 
 F-statistic:  18.7 on 9 and 176 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<p>From the summary intercept estimates, only Oceania is investing less per year than North America. However, the p-value for the Oceania region is greater than the significance level of 0.05 and therefore we cannot say its represented rate of renewable investment is statistically significant and we fail to reject a null hypothesis that there is no difference in investment over time. As useful as the <code>summary()</code> function is, it is not easy to compare regional investment trends with it so the below table was made to show each reagions rate of renewable investment according to this model and its corresponding p-value.</p>
+<p>From the summary intercept estimates, only Oceania is investing less per year than North America. However, the p-value for the Oceania region is greater than the significance level of 0.05 and therefore we cannot say its represented rate of renewable investment is statistically significant and we fail to reject a null hypothesis that there is no difference in investment over time. As useful as the <code>summary()</code> function is, it is not easy to compare regional investment trends with it so the below table was made to show each regions rate of renewable investment according to this model and its corresponding p-value.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1690,7 +1690,7 @@ p-value
 North America
 </td>
 <td style="text-align:right;">
-144.2201
+144.22
 </td>
 <td style="text-align:right;">
 0.0000000
@@ -1701,7 +1701,7 @@ North America
 Africa
 </td>
 <td style="text-align:right;">
-145.6645
+145.66
 </td>
 <td style="text-align:right;">
 0.0000001
@@ -1712,7 +1712,7 @@ Africa
 Asia
 </td>
 <td style="text-align:right;">
-145.5193
+145.52
 </td>
 <td style="text-align:right;">
 0.0000016
@@ -1723,7 +1723,7 @@ Asia
 Central America and the Caribbean
 </td>
 <td style="text-align:right;">
-144.3542
+144.35
 </td>
 <td style="text-align:right;">
 0.6085661
@@ -1734,7 +1734,7 @@ Central America and the Caribbean
 Eurasia
 </td>
 <td style="text-align:right;">
-144.3764
+144.38
 </td>
 <td style="text-align:right;">
 0.5556701
@@ -1745,7 +1745,7 @@ Eurasia
 Europe
 </td>
 <td style="text-align:right;">
-145.4790
+145.48
 </td>
 <td style="text-align:right;">
 0.0000031
@@ -1756,7 +1756,7 @@ Europe
 Middle East
 </td>
 <td style="text-align:right;">
-144.2377
+144.24
 </td>
 <td style="text-align:right;">
 0.9462119
@@ -1767,7 +1767,7 @@ Middle East
 Oceania
 </td>
 <td style="text-align:right;">
-144.0871
+144.09
 </td>
 <td style="text-align:right;">
 0.6208455
@@ -1778,7 +1778,7 @@ Oceania
 South America
 </td>
 <td style="text-align:right;">
-145.8044
+145.80
 </td>
 <td style="text-align:right;">
 0.0000000
@@ -1787,58 +1787,197 @@ South America
 </tbody>
 </table>
 </div>
+<p>From this table we can observe that the projected investment rates per year are quite similar across each region and are too close to draw conclusions. It should be noted however that these seemingly small differences would illuminate themselves more over time and this will be represented in a graphical representation of this regression below. The most important takeaway from the table above is that we can say the regions of North America, Africa, Asia, Europe, and South America all have p -values below a significance level of 0.05 and therefore are significantly significant. The regions of Central America and the Caribbean, Eurasia, the Middle East, and Oceania all have significant levels greater than 0.05 and therefore we fail to reject a null hypothesis for these regions and cannot say that they are increasing their investment in renewable energy over time. Below is a plot of the regional investment across time model.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
 </div>
-<p>Discuss results…</p>
+<p>Based on the regional interaction model above we are next going to do the same for non-renewable energy investment and will summarize them into one output table with the renewables investment regression.</p>
 <div class="layout-chunk" data-layout="l-body">
-<pre><code>
-Call:
-lm(formula = region_sum ~ year + region:year, data = region_non_renewable_fin)
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--5207.4 -1208.7  -365.5   381.0 18388.7 
-
-Coefficients:
-                                               Estimate Std. Error
-(Intercept)                                  -2.112e+05  7.110e+04
-year                                          1.052e+02  3.540e+01
-year:regionAfrica                             9.241e-01  4.728e-01
-year:regionAsia                               2.092e+00  4.728e-01
-year:regionCentral America and the Caribbean -1.594e-01  4.833e-01
-year:regionEurasia                            7.823e-01  4.728e-01
-year:regionEurope                             3.354e-01  4.728e-01
-year:regionMiddle East                        1.669e-01  4.894e-01
-year:regionOceania                           -3.264e-02  4.930e-01
-year:regionSouth America                      1.137e+00  4.728e-01
-                                             t value Pr(&gt;|t|)    
-(Intercept)                                   -2.971  0.00342 ** 
-year                                           2.972  0.00341 ** 
-year:regionAfrica                              1.954  0.05240 .  
-year:regionAsia                                4.424 1.77e-05 ***
-year:regionCentral America and the Caribbean  -0.330  0.74202    
-year:regionEurasia                             1.655  0.09995 .  
-year:regionEurope                              0.709  0.47909    
-year:regionMiddle East                         0.341  0.73352    
-year:regionOceania                            -0.066  0.94730    
-year:regionSouth America                       2.405  0.01730 *  
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-Residual standard error: 2687 on 162 degrees of freedom
-Multiple R-squared:  0.2572,    Adjusted R-squared:  0.2159 
-F-statistic: 6.233 on 9 and 162 DF,  p-value: 1.538e-07</code></pre>
-</div>
-<h3 id="plots">Plots</h3>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-14-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-15-1.png" width="624" /></p>
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Region
+</th>
+<th style="text-align:right;">
+Renewable Investment per Year (million USD)
+</th>
+<th style="text-align:right;">
+Renewable p-value
+</th>
+<th style="text-align:right;">
+Non-renewable Investment per Year (million USD)
+</th>
+<th style="text-align:right;">
+Non-renewable p-value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+North America
+</td>
+<td style="text-align:right;width: 2in; ">
+144.22
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;width: 2in; ">
+105.22
+</td>
+<td style="text-align:right;">
+0.0034085
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Africa
+</td>
+<td style="text-align:right;width: 2in; ">
+145.66
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+<td style="text-align:right;width: 2in; ">
+106.15
+</td>
+<td style="text-align:right;">
+0.0523959
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Asia
+</td>
+<td style="text-align:right;width: 2in; ">
+145.52
+</td>
+<td style="text-align:right;">
+0.0000016
+</td>
+<td style="text-align:right;width: 2in; ">
+107.31
+</td>
+<td style="text-align:right;">
+0.0000177
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Central America and the Caribbean
+</td>
+<td style="text-align:right;width: 2in; ">
+144.35
+</td>
+<td style="text-align:right;">
+0.6085661
+</td>
+<td style="text-align:right;width: 2in; ">
+105.06
+</td>
+<td style="text-align:right;">
+0.7420230
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Eurasia
+</td>
+<td style="text-align:right;width: 2in; ">
+144.38
+</td>
+<td style="text-align:right;">
+0.5556701
+</td>
+<td style="text-align:right;width: 2in; ">
+106.01
+</td>
+<td style="text-align:right;">
+0.0999548
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Europe
+</td>
+<td style="text-align:right;width: 2in; ">
+145.48
+</td>
+<td style="text-align:right;">
+0.0000031
+</td>
+<td style="text-align:right;width: 2in; ">
+105.56
+</td>
+<td style="text-align:right;">
+0.4790934
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Middle East
+</td>
+<td style="text-align:right;width: 2in; ">
+144.24
+</td>
+<td style="text-align:right;">
+0.9462119
+</td>
+<td style="text-align:right;width: 2in; ">
+105.39
+</td>
+<td style="text-align:right;">
+0.7335187
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oceania
+</td>
+<td style="text-align:right;width: 2in; ">
+144.09
+</td>
+<td style="text-align:right;">
+0.6208455
+</td>
+<td style="text-align:right;width: 2in; ">
+105.19
+</td>
+<td style="text-align:right;">
+0.9472953
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South America
+</td>
+<td style="text-align:right;width: 2in; ">
+145.80
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;width: 2in; ">
+106.36
+</td>
+<td style="text-align:right;">
+0.0172993
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <h2 id="next-steps">Next Steps</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
