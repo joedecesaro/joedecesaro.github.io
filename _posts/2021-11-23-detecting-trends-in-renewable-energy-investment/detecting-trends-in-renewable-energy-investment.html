@@ -1483,9 +1483,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<h1 id="what-is-the-trend-of-renewable-energy-investment-over-time">What is the trend of renewable energy investment over time?</h1>
-<p>Implementation of renewable energy into electric grids around the world will be key to curbing the effects of climate change. It is no secret that change usually occurs where money flows. In the past, renewable energy technologies such as solar and wind have been expensive forms of generating electricity but, over the last ten years there has been a steep decline in their costs. From 2009 to 2019 the price of electricity from solar power has dropped 89% and the wind has dropped 70% (Roser, 2020). This begs the question, how is investment in renewable technologies changing over time? How does this compare to investment in non-renewable energy?</p>
-<p>This question is important to know for the future of climate change. As climate change becomes an ever more present and increasing threat, detecting these trends can tell us if our world is on the right track to reducing carbon emissions from energy generation. No doubt there is research into this topic in the public and private sector, however answers were not readily available when conducting research into this question. This blog post hopes to fill this void and provide insights into renewable energy investment trends over time. This post is by no means a comprehensive study, however it will provide some quick insights.</p>
+<h1 id="what-is-the-global-trend-of-regional-renewable-energy-investment-over-time">What is the global trend of regional renewable energy investment over time?</h1>
+<p>Implementation of renewable energy into electric grids around the world will be key to curbing the effects of climate change. Three quarters of global greenhouse gas emissions result from fossil fuel energy production (Ritchie, Roser, 2020). It is no secret that change usually occurs where money flows so understanding the global trend in energy investments would help us understand if we are headed for a more climate resilient future. In the past, renewable energy technologies such as solar and wind have been expensive forms of generating electricity but, over the last ten years there has been a steep decline in their costs. From 2009 to 2019 the price of electricity from solar power has dropped 89% and the wind has dropped 70% (Roser, 2020). It might seem obvious that renewable portfolios have been growing in recent years as governments and politicians advertise, however does data actually support this? How are investments in renewable technologies changing over time? How does this compare to investment in non-renewable energy?</p>
+<p>As climate change becomes an ever more present and increasing threat, detecting these trends can tell us if our world is on the right track to reducing carbon emissions from energy generation. The International Renewable Energy Agency (IRENA) dives deep into this question in its report, “Global Landscape of Renewable Energy Finance 2020”. <strong>What does this do exactly?</strong> This blog post will take a more streamlined look at the general investment trend of global regions across time with simple linear regression models. Then, using a significance level of 0.05, will detect whether the results from the models are statistically significant. This post is by no means a comprehensive study, however it will provide some quick insights.</p>
 <h2 id="data">Data</h2>
 <p>The data being used is annualized totals of investment for each data point and therefore does not have a seasonal component.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1628,47 +1628,10 @@ F-statistic: 8.023 on 1 and 170 DF,  p-value: 0.005176</code></pre>
 </div>
 <p>It can be observed from the graph that there has been significant investment in renewable (green) and non-renewable (tan) energy projects since the 2008 recession. The plot illustrates just how much variance there is in investment totals across regions in each year. As discussed above the plot does show that there is a larger investment in renewables year-over-year. As this data is only from the years 2000-2020 these investment trends do not reflect the historical investments in non-renewable energy sources. As this simple regression only looks at the trend over time we will now see how these investment trends compare across regions. In the original model outlier regional trends could be affecting our simple investment trend.</p>
 <h3 id="regional-renewable-investment">Regional Renewable Investment</h3>
-<p>Below the same <code>summary()</code> function is used to quickly provide some summary statistics for the interaction regression of time and region on renewable investment trends. In the model the North American region was set as the base level of the regression. This was done because North America contains the United States, the country with the largest GDP in the world and therefore a significant marker to compare other regions to it.</p>
+<p>Below the same <code>summary()</code> function is used to calculate coefficients and summary statistics for the interaction regression of time and region on annual renewable investment. While the <code>summary()</code> function is useful, its’ output can be quite messy with interaction models so a table was made from the results to include the annual investment rates for different regions and their corresponding p-values. In the model the North American region was set as the base level of the regression. This was done because North America contains the United States, the country with the largest GDP in the world and therefore a significant marker to compare against other regions.</p>
 <div class="layout-chunk" data-layout="l-body">
-<pre><code>
-Call:
-lm(formula = region_sum ~ year + region:year, data = region_renewable_fin)
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--4255.0  -970.4   -40.1   640.4  9824.1 
-
-Coefficients:
-                                               Estimate Std. Error
-(Intercept)                                  -2.897e+05  4.204e+04
-year                                          1.442e+02  2.092e+01
-year:regionAfrica                             1.444e+00  2.614e-01
-year:regionAsia                               1.299e+00  2.614e-01
-year:regionCentral America and the Caribbean  1.341e-01  2.614e-01
-year:regionEurasia                            1.563e-01  2.647e-01
-year:regionEurope                             1.259e+00  2.614e-01
-year:regionMiddle East                        1.766e-02  2.614e-01
-year:regionOceania                           -1.330e-01  2.683e-01
-year:regionSouth America                      1.584e+00  2.614e-01
-                                             t value Pr(&gt;|t|)    
-(Intercept)                                   -6.891 9.49e-11 ***
-year                                           6.895 9.28e-11 ***
-year:regionAfrica                              5.526 1.16e-07 ***
-year:regionAsia                                4.971 1.57e-06 ***
-year:regionCentral America and the Caribbean   0.513    0.609    
-year:regionEurasia                             0.590    0.556    
-year:regionEurope                              4.817 3.14e-06 ***
-year:regionMiddle East                         0.068    0.946    
-year:regionOceania                            -0.496    0.621    
-year:regionSouth America                       6.061 8.00e-09 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-Residual standard error: 1702 on 176 degrees of freedom
-Multiple R-squared:  0.4888,    Adjusted R-squared:  0.4627 
-F-statistic:  18.7 on 9 and 176 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<p>From the summary intercept estimates, only Oceania is investing less per year than North America. However, the p-value for the Oceania region is greater than the significance level of 0.05 and therefore we cannot say its represented rate of renewable investment is statistically significant and we fail to reject a null hypothesis that there is no difference in investment over time. As useful as the <code>summary()</code> function is, it is not easy to compare regional investment trends with it so the below table was made to show each regions rate of renewable investment according to this model and its corresponding p-value.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1690,10 +1653,10 @@ p-value
 North America
 </td>
 <td style="text-align:right;">
-144.22
+24.76
 </td>
 <td style="text-align:right;">
-0.0000000
+0.6615318
 </td>
 </tr>
 <tr>
@@ -1701,10 +1664,10 @@ North America
 Africa
 </td>
 <td style="text-align:right;">
-145.66
+288.09
 </td>
 <td style="text-align:right;">
-0.0000001
+0.0011902
 </td>
 </tr>
 <tr>
@@ -1712,10 +1675,10 @@ Africa
 Asia
 </td>
 <td style="text-align:right;">
-145.52
+234.07
 </td>
 <td style="text-align:right;">
-0.0000016
+0.0095686
 </td>
 </tr>
 <tr>
@@ -1723,10 +1686,10 @@ Asia
 Central America and the Caribbean
 </td>
 <td style="text-align:right;">
-144.35
+54.20
 </td>
 <td style="text-align:right;">
-0.6085661
+0.7128610
 </td>
 </tr>
 <tr>
@@ -1734,10 +1697,10 @@ Central America and the Caribbean
 Eurasia
 </td>
 <td style="text-align:right;">
-144.38
+54.84
 </td>
 <td style="text-align:right;">
-0.5556701
+0.7173467
 </td>
 </tr>
 <tr>
@@ -1745,10 +1708,10 @@ Eurasia
 Europe
 </td>
 <td style="text-align:right;">
-145.48
+315.08
 </td>
 <td style="text-align:right;">
-0.0000031
+0.0003684
 </td>
 </tr>
 <tr>
@@ -1756,10 +1719,10 @@ Europe
 Middle East
 </td>
 <td style="text-align:right;">
-144.24
+22.61
 </td>
 <td style="text-align:right;">
-0.9462119
+0.9785519
 </td>
 </tr>
 <tr>
@@ -1767,10 +1730,10 @@ Middle East
 Oceania
 </td>
 <td style="text-align:right;">
-144.09
+7.27
 </td>
 <td style="text-align:right;">
-0.6208455
+0.8400681
 </td>
 </tr>
 <tr>
@@ -1778,20 +1741,21 @@ Oceania
 South America
 </td>
 <td style="text-align:right;">
-145.80
+255.03
 </td>
 <td style="text-align:right;">
-0.0000000
+0.0044462
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>From this table we can observe that the projected investment rates per year are quite similar across each region and are too close to draw conclusions. It should be noted however that these seemingly small differences would illuminate themselves more over time and this will be represented in a graphical representation of this regression below. The most important takeaway from the table above is that we can say the regions of North America, Africa, Asia, Europe, and South America all have p -values below a significance level of 0.05 and therefore are significantly significant. The regions of Central America and the Caribbean, Eurasia, the Middle East, and Oceania all have significant levels greater than 0.05 and therefore we fail to reject a null hypothesis for these regions and cannot say that they are increasing their investment in renewable energy over time. Below is a plot of the regional investment across time model.</p>
+<p>From this table we can see the annual investment rates per year by each region according to this linear regression model. The regions with the two highest investment rates over time are Europe and Africa. Europe has widely been seen as a leader in renewable energy development so it is not surprising that it has a high rate. From the original dataset, Africa’s renewable energy investment has been particularly high in hydropower throughout various countries. The regions with the two lowest investment rates over time are Oceania and the Middle East. Oceania is primarily made up of island nations with low populations so large investments in these technologies can be challenging. The Middle East produces large quantities of the world’s fossil fuels so its lack of investment is also not surprising. Below is a plot that shows the regional model and the renewable investment rates over time seperated by region.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
 </div>
-<p>Based on the regional interaction model above we are next going to do the same for non-renewable energy investment and will summarize them into one output table with the renewables investment regression.</p>
+<p>Our graphic clearly defines two different investment rate categories for global regions, a high investment rate group and a low investment rate group. The high rate investment group contains Europe, Africa,South America, and Asia. The low rate of investment group contains North America, Central America and the Caribbean, Eurasia, the Middle East, and Oceania.</p>
+<p>Based on the regional interaction model above we are next going to do the same for non-renewable energy investment and will summarize both models into one output table with the renewables investment regression.</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
@@ -1825,16 +1789,16 @@ Non-renewable p-value
 North America
 </td>
 <td style="text-align:right;width: 2in; ">
-144.22
+24.76
 </td>
 <td style="text-align:right;">
-0.0000000
+0.6615318
 </td>
 <td style="text-align:right;width: 2in; ">
-105.22
+9.97
 </td>
 <td style="text-align:right;">
-0.0034085
+0.9456139
 </td>
 </tr>
 <tr>
@@ -1842,16 +1806,16 @@ North America
 Africa
 </td>
 <td style="text-align:right;width: 2in; ">
-145.66
+288.09
 </td>
 <td style="text-align:right;">
-0.0000001
+0.0011902
 </td>
 <td style="text-align:right;width: 2in; ">
-106.15
+155.40
 </td>
 <td style="text-align:right;">
-0.0523959
+0.4086434
 </td>
 </tr>
 <tr>
@@ -1859,16 +1823,16 @@ Africa
 Asia
 </td>
 <td style="text-align:right;width: 2in; ">
-145.52
+234.07
 </td>
 <td style="text-align:right;">
-0.0000016
+0.0095686
 </td>
 <td style="text-align:right;width: 2in; ">
-107.31
+254.85
 </td>
 <td style="text-align:right;">
-0.0000177
+0.1649952
 </td>
 </tr>
 <tr>
@@ -1876,16 +1840,16 @@ Asia
 Central America and the Caribbean
 </td>
 <td style="text-align:right;width: 2in; ">
-144.35
+54.20
 </td>
 <td style="text-align:right;">
-0.6085661
+0.7128610
 </td>
 <td style="text-align:right;width: 2in; ">
-105.06
+6.05
 </td>
 <td style="text-align:right;">
-0.7420230
+0.9829376
 </td>
 </tr>
 <tr>
@@ -1893,16 +1857,16 @@ Central America and the Caribbean
 Eurasia
 </td>
 <td style="text-align:right;width: 2in; ">
-144.38
+54.84
 </td>
 <td style="text-align:right;">
-0.5556701
+0.7173467
 </td>
 <td style="text-align:right;width: 2in; ">
-106.01
+96.44
 </td>
 <td style="text-align:right;">
-0.0999548
+0.6229642
 </td>
 </tr>
 <tr>
@@ -1910,16 +1874,16 @@ Eurasia
 Europe
 </td>
 <td style="text-align:right;width: 2in; ">
-145.48
+315.08
 </td>
 <td style="text-align:right;">
-0.0000031
+0.0003684
 </td>
 <td style="text-align:right;width: 2in; ">
-105.56
+81.26
 </td>
 <td style="text-align:right;">
-0.4790934
+0.6852117
 </td>
 </tr>
 <tr>
@@ -1927,16 +1891,16 @@ Europe
 Middle East
 </td>
 <td style="text-align:right;width: 2in; ">
-144.24
+22.61
 </td>
 <td style="text-align:right;">
-0.9462119
+0.9785519
 </td>
 <td style="text-align:right;width: 2in; ">
-105.39
+35.86
 </td>
 <td style="text-align:right;">
-0.7335187
+0.8897374
 </td>
 </tr>
 <tr>
@@ -1944,16 +1908,16 @@ Middle East
 Oceania
 </td>
 <td style="text-align:right;width: 2in; ">
-144.09
+7.27
 </td>
 <td style="text-align:right;">
-0.6208455
+0.8400681
 </td>
 <td style="text-align:right;width: 2in; ">
-105.19
+-0.56
 </td>
 <td style="text-align:right;">
-0.9472953
+0.9573164
 </td>
 </tr>
 <tr>
@@ -1961,23 +1925,25 @@ Oceania
 South America
 </td>
 <td style="text-align:right;width: 2in; ">
-145.80
+255.03
 </td>
 <td style="text-align:right;">
-0.0000000
+0.0044462
 </td>
 <td style="text-align:right;width: 2in; ">
-106.36
+171.52
 </td>
 <td style="text-align:right;">
-0.0172993
+0.3588261
 </td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>The above table allows for the comparison of the rates of renewable and non-renewable investments over time by each region and their corresponding p-values. The non-renewable regression model has no investment rate p-value below a significance level of 0.05. Therefore no non-renewable investment rate can be considered statistically significant. For renewables, the investment rates for Africa, Asia, Europe, and South America can be considered statistically significant as their p-values are below a significance level of 0.05.</p>
+<p>Some interesting regional insights from this table however show that Aouth America, Africa, and Asia are investing heavily in renewable and non-renewable energies over time. These regions have economies that are developing rapidly compared to other regions of the world and it is evident in these investment trends. According to the regression models, Europe has</p>
 <h2 id="next-steps">Next Steps</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

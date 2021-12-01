@@ -61,25 +61,28 @@ fin_energy <- fin_energy %>%
 # Separate the data into the renewable and non-renewable investments
 renewable_fin <- fin_energy %>% 
   filter(category == "Renewables") %>% 
-  group_by(country_area, region, year) %>% 
+  group_by(country_area, region, category, year) %>% 
   summarise(country_sum = sum(amount_2019_usd_million))
 
 non_renewable_fin <- fin_energy %>% 
   filter(category =="Non-renewables") %>% 
-  group_by(country_area, region, year) %>% 
+  group_by(country_area, region, category, year) %>% 
   summarise(country_sum = sum(amount_2019_usd_million))
 ```
 
 ```{r}
 # Make data table for renewables for by region
 region_renewable_fin <- renewable_fin %>% 
-  group_by(region, year) %>% 
+  group_by(region, category, year) %>% 
   summarise(region_sum = sum(country_sum))
 
 # Make data table for non-renewables for by region
 region_non_renewable_fin <- non_renewable_fin %>% 
-  group_by(region, year) %>% 
+  group_by(region, category, year) %>% 
   summarise(region_sum = sum(country_sum))
+
+full_region_fin <- full_join(x = region_renewable_fin, 
+                             y = region_non_renewable_fin)
 ```
 
 ## Analysis Plan
@@ -119,29 +122,25 @@ summary_model_non_renew
 From the `summary()` of this model we can see that by country there is also a positive trend of non-renewable investment across regions. According to this model there is an increase in non-renewable investments by `r round(summary_model_non_renew$coefficients[2,"Estimate"], 2)` million USD. With a p-value of 0.005 can confidently reject a null hypothesis of there being no relationship between non-renewable investment over time with a significance level of 0.05. According to these two simple models, there is a larger increase in renewable investments year over year compared to non-renewables but as the standard errors for the models overlap this is not conclusive and this blog post will not be pursuing this question. Below is a plot that compares renewable and non-renewable investments over time, along with their respective models.
 
 ```{r}
-simple_model_plot <- ggplot(data = region_renewable_fin, 
-                            aes(x = year, y = region_sum)) + 
-  geom_point(color = "darkgreen", 
-             alpha = 0.8) + 
-  geom_line(data = augment(model_renew), 
-             aes( y = .fitted), 
+simple_model_plot <- ggplot(data = full_region_fin, 
+                            aes(x = year, 
+                                y = region_sum,
+                                color = category)) + 
+  geom_point(alpha = 0.8) +
+  scale_color_manual(name = "Energy Type", 
+                     values = c("tan3", "darkgreen")) +
+  geom_line(data = augment(model_renew),
+             aes( y = .fitted),
              color = "darkgreen") +
-  geom_point(data = region_non_renewable_fin, 
-             aes(x = year, y = region_sum), 
-             color = "tan3",
-             alpha = 0.8) +
-    geom_line(data = augment(model_non_renew), 
-             aes( y = .fitted), 
+  geom_line(data = augment(model_non_renew),
+             aes( y = .fitted),
              color = "tan3") +
-  labs(caption = "Renewable investments from 2000-2020 are increasing at a rate of 141 million USD per year according to this model.\nNon-renewable invesments over the same time period are increasing at a rate of 110 million USD per year.", 
+  labs(caption = "Renewable investments from 2000-2020 are increasing at a rate of 141 million USD per year according to this model.\nNon-renewable invesments over the same time period are increasing at a rate of 110 million USD per year.",
        title = "Comparing Investment Renewable and Non-Renewable Energy Investment
 Across Regional Sums") +
   xlab(label = "Year") +
   ylab(label = "Annual Regional Sum of Investment (million USD)") +
   theme_bw() +
-  scale_color_discrete(name = "Energy Source", 
-                       breaks = c("Renewables", "Non-Renewables"),
-                       labels = c("Renewables", "Non-Renewables")) + 
   theme(plot.caption = element_text(hjust = 0))
   
   
@@ -151,18 +150,16 @@ simple_model_plot
 It can be observed from the graph that there has been significant investment in renewable (green) and non-renewable (tan) energy projects since the 2008 recession. The plot illustrates just how much variance there is in investment totals across regions in each year. As discussed above the plot does show that there is a larger investment in renewables year-over-year. As this data is only from the years 2000-2020 these investment trends do not reflect the historical investments in non-renewable energy sources. As this simple regression only looks at the trend over time we will now see how these investment trends compare across regions. In the original model outlier regional trends could be affecting our simple investment trend.
 
 ### Regional Renewable Investment
-Below the same `summary()` function is used to quickly provide some summary statistics for the interaction regression of time and region on renewable investment trends. In the model the North American region was set as the base level of the regression. This was done because North America contains the United States, the country with the largest GDP in the world and therefore a significant marker to compare other regions to it.
+Below the same `summary()` function is used to calculate coefficients and summary statistics for the interaction regression of time and region on annual renewable investment. While the `summary()` function is useful, its' output can be quite messy with interaction models so a table was made from the results to include the annual investment rates for different regions and their corresponding p-values. In the model the North American region was set as the base level of the regression. This was done because North America contains the United States, the country with the largest GDP in the world and therefore a significant marker to compare against other regions. 
 
 ```{r}
 # Make levels for regions with North America as first to compare our region to the rest of the world
 region_renewable_fin$region <- factor(region_renewable_fin$region, levels = c("North America", "Africa", "Asia", "Central America and the Caribbean", "Eurasia", "Europe", "Middle East", "Oceania", "South America"))
 
 # Make the regional investment model
-region_model <-  lm(region_sum ~ year + region:year, data = region_renewable_fin)
+region_model <-  lm(region_sum ~ year + region + region:year, data = region_renewable_fin)
 region_renew_model_summary <- summary(region_model)
-region_renew_model_summary
 ```
-From the summary intercept estimates, only Oceania is investing less per year than North America. However, the p-value for the Oceania region is greater than the significance level of 0.05 and therefore we cannot say its represented rate of renewable investment is statistically significant and we fail to reject a null hypothesis that there is no difference in investment over time. As useful as the `summary()` function is, it is not easy to compare regional investment trends with it so the below table was made to show each regions rate of renewable investment according to this model and its corresponding p-value. 
 
 ```{r}
 # Making the results a summary table
@@ -176,23 +173,23 @@ summary_renew_region_table <- data.frame(Region = c("North America",
                                                       "Oceania", 
                                                       "South America"), 
                                          Renewable_Investment = c(region_renew_model_summary$coefficients[2,"Estimate"], 
-                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[3,"Estimate"],
-                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[4,"Estimate"],
-                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[5,"Estimate"],
-                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[6,"Estimate"],
-                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[7,"Estimate"],
-                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[8,"Estimate"],
-                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[9,"Estimate"],
-                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[10,"Estimate"]),
+                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[11,"Estimate"],
+                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[12,"Estimate"],
+                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[13,"Estimate"],
+                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[14,"Estimate"],
+                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[15,"Estimate"],
+                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[16,"Estimate"],
+                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[17,"Estimate"],
+                                                                  region_renew_model_summary$coefficients[2,"Estimate"] + region_renew_model_summary$coefficients[18,"Estimate"]),
                                          p_value = c(region_renew_model_summary$coefficients[2,"Pr(>|t|)"], 
-                                                                                         region_renew_model_summary$coefficients[3,"Pr(>|t|)"],
-                                                                                         region_renew_model_summary$coefficients[4,"Pr(>|t|)"],
-                                                                                         region_renew_model_summary$coefficients[5,"Pr(>|t|)"],
-                                                                                         region_renew_model_summary$coefficients[6,"Pr(>|t|)"],
-                                                                                         region_renew_model_summary$coefficients[7,"Pr(>|t|)"],
-                                                                                         region_renew_model_summary$coefficients[8,"Pr(>|t|)"],
-                                                                                         region_renew_model_summary$coefficients[9,"Pr(>|t|)"],
-                                                                                         region_renew_model_summary$coefficients[10,"Pr(>|t|)"])
+                                                                                         region_renew_model_summary$coefficients[11,"Pr(>|t|)"],
+                                                                                         region_renew_model_summary$coefficients[12,"Pr(>|t|)"],
+                                                                                         region_renew_model_summary$coefficients[13,"Pr(>|t|)"],
+                                                                                         region_renew_model_summary$coefficients[14,"Pr(>|t|)"],
+                                                                                         region_renew_model_summary$coefficients[15,"Pr(>|t|)"],
+                                                                                         region_renew_model_summary$coefficients[16,"Pr(>|t|)"],
+                                                                                         region_renew_model_summary$coefficients[17,"Pr(>|t|)"],
+                                                                                         region_renew_model_summary$coefficients[18,"Pr(>|t|)"])
 ) %>% 
   mutate(Renewable_Investment = round(Renewable_Investment, 2))
 
@@ -201,7 +198,7 @@ summary_renew_region_table %>%
   kable_styling(bootstrap_options = "striped", full_width = FALSE)
 ```
 
-From this table we can observe that the projected investment rates per year are quite similar across each region and are too close to draw conclusions. It should be noted however that these seemingly small differences would illuminate themselves more over time and this will be represented in a graphical representation of this regression below. The most important takeaway from the table above is that we can say the regions of North America, Africa, Asia, Europe, and South America all have p -values below a significance level of 0.05 and therefore are significantly significant. The regions of Central America and the Caribbean, Eurasia, the Middle East, and Oceania all have significant levels greater than 0.05 and therefore we fail to reject a null hypothesis for these regions and cannot say that they are increasing their investment in renewable energy over time. Below is a plot of the regional investment across time model.
+From this table we can see the annual investment rates per year by each region according to this linear regression model. The regions with the two highest investment rates over time are Europe and Africa. Europe has widely been seen as a leader in renewable energy development so it is not surprising that it has a high rate. From the original dataset, Africa's renewable energy investment has been particularly high in hydropower throughout various countries. The regions with the two lowest investment rates over time are Oceania and the Middle East. Oceania is primarily made up of island nations with low populations so large investments in these technologies can be challenging. The Middle East produces large quantities of the world's fossil fuels so its lack of investment is also not surprising. Below is a plot that shows the regional model and the renewable investment rates over time seperated by region.
 
 ```{r}
 # Plotting the regional model
@@ -211,8 +208,8 @@ regional_model_plot <- ggplot(data = region_renewable_fin,
   geom_line(data = augment(region_model), 
              aes(y = .fitted)) + 
   scale_color_paletteer_d("colorBlindness::paletteMartin") +
-  labs(caption = "Renewable investments from 2000-2020 are increasing over time for North America, Africa, Asia, Europe, and\nSouth America. The model suggests the same for Central America and the Caribbean, Eurasia, the Middle East,\nand Oceania however, they have p-values greater than the significance level of 0.05.",
-       title = "Determining the Rate of Renewable Investment Over Time by Each Region") +
+  labs(caption = "Renewable investments from 2000-2020 are increasing over time at greater rates for Europe, Africa,\nSouth America, and Asia at a much greater rate than compared to the other regions. This graph shows\nthere are two distinct groups of renewable investment rates across time, a high investment group and a\nlow investment group",
+       title = "Determining the Rate of Renewable Investment Over Time by\nEach Region") +
   xlab(label = "Year") +
   ylab(label = "Annual Regional Sum of Investment (million USD)") +
   theme_bw() + 
@@ -222,37 +219,39 @@ regional_model_plot <- ggplot(data = region_renewable_fin,
 regional_model_plot
 ```
 
-Based on the regional interaction model above we are next going to do the same for non-renewable energy investment and will summarize them into one output table with the renewables investment regression.
+Our graphic clearly defines two different investment rate categories for global regions, a high investment rate group and a low investment rate group. The high rate investment group contains Europe, Africa,South America, and Asia. The low rate of investment group contains North America, Central America and the Caribbean, Eurasia, the Middle East, and Oceania.
+
+Based on the regional interaction model above we are next going to do the same for non-renewable energy investment and will summarize both models into one output table with the renewables investment regression.
 
 ```{r}
 # Make levels for regions with North America as first to compare our region to the rest of the world
 region_non_renewable_fin$region <- factor(region_non_renewable_fin$region, levels = c("North America", "Africa", "Asia", "Central America and the Caribbean", "Eurasia", "Europe", "Middle East", "Oceania", "South America"))
 
 # Make the regional investment model
-region_non_renew_model <-  lm(region_sum ~ year + region:year, data = region_non_renewable_fin)
+region_non_renew_model <-  lm(region_sum ~ year + region + region:year, data = region_non_renewable_fin)
 region_non_renew_model_summary <- summary(region_non_renew_model)
 ```
 
 ```{r}
 summary_investment_region_table <-  data.frame(summary_renew_region_table, 
                                                Non_Renewable_Investment = c(region_non_renew_model_summary$coefficients[2,"Estimate"], 
-                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[3,"Estimate"],
-                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[4,"Estimate"],
-                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[5,"Estimate"],
-                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[6,"Estimate"],
-                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[7,"Estimate"],
-                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[8,"Estimate"],
-                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[9,"Estimate"],
-                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[10,"Estimate"]), 
+                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[11,"Estimate"],
+                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[12,"Estimate"],
+                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[13,"Estimate"],
+                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[14,"Estimate"],
+                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[15,"Estimate"],
+                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[16,"Estimate"],
+                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[17,"Estimate"],
+                                                                  region_non_renew_model_summary$coefficients[2,"Estimate"] + region_non_renew_model_summary$coefficients[18,"Estimate"]), 
                                                Non_Renewable_p_value = c(region_non_renew_model_summary$coefficients[2,"Pr(>|t|)"], 
-                                                                         region_non_renew_model_summary$coefficients[3,"Pr(>|t|)"],
-                                                                         region_non_renew_model_summary$coefficients[4,"Pr(>|t|)"],
-                                                                         region_non_renew_model_summary$coefficients[5,"Pr(>|t|)"],
-                                                                         region_non_renew_model_summary$coefficients[6,"Pr(>|t|)"],
-                                                                         region_non_renew_model_summary$coefficients[7,"Pr(>|t|)"],
-                                                                         region_non_renew_model_summary$coefficients[8,"Pr(>|t|)"],
-                                                                         region_non_renew_model_summary$coefficients[9,"Pr(>|t|)"],
-                                                                         region_non_renew_model_summary$coefficients[10,"Pr(>|t|)"])) %>% 
+                                                                         region_non_renew_model_summary$coefficients[11,"Pr(>|t|)"],
+                                                                         region_non_renew_model_summary$coefficients[12,"Pr(>|t|)"],
+                                                                         region_non_renew_model_summary$coefficients[13,"Pr(>|t|)"],
+                                                                         region_non_renew_model_summary$coefficients[14,"Pr(>|t|)"],
+                                                                         region_non_renew_model_summary$coefficients[15,"Pr(>|t|)"],
+                                                                         region_non_renew_model_summary$coefficients[16,"Pr(>|t|)"],
+                                                                         region_non_renew_model_summary$coefficients[17,"Pr(>|t|)"],
+                                                                         region_non_renew_model_summary$coefficients[18,"Pr(>|t|)"])) %>% 
   mutate(Non_Renewable_Investment = round(Non_Renewable_Investment, 2))
 ```
 
@@ -270,6 +269,9 @@ summary_investment_region_table %>%
 
 ```
 
-The above table allows for the comparison of the rates of renewable and non-renewable investments over time by each region and their corresponding p-values. Based on the non-renewable data, the rates of investment for every region except North America and Asia have p-values greater than the significance level of 0.05. Therefore only the rates for North America and Asia can be considered statistically significant while the others are not.
+The above table allows for the comparison of the rates of renewable and non-renewable investments over time by each region and their corresponding p-values. The non-renewable regression model has no investment rate p-value below a significance level of 0.05. Therefore no non-renewable investment rate can be considered statistically significant. For renewables, the investment rates for Africa, Asia, Europe, and South America can be considered statistically significant as their p-values are below a significance level of 0.05.
+
+Some interesting regional insights from this table however show that Aouth America, Africa, and Asia are investing heavily in renewable and non-renewable energies over time. These regions have economies that are developing rapidly compared to other regions of the world and it is evident in these investment trends.  According to the regression models, Europe has 
+
 
 ## Next Steps
