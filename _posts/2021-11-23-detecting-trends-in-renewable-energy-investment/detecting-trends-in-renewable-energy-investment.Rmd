@@ -4,7 +4,7 @@ description: |
   Here I explore trends in annualized renewable and non-renewable energy investments by different regions around the world. I also test the statistical significance of the findings.
 author:
   - name: Joe DeCesaro
-date: 12-01-2021
+date: 11-23-2021
 output:
   html_document:
     toc: yes
