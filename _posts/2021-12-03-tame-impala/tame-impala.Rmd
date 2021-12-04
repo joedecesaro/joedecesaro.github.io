@@ -1,0 +1,56 @@
+---
+title: "Tame Impala"
+description: |
+  I dive into Tame Impala's music through the spotifyr package and Spotify's API.
+author:
+  - name: Joe DeCesaro
+    url: {}
+date: 12-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(spotifyr)
+library(tidyverse)
+```
+
+```{r, include = FALSE}
+#setup
+id <- '858051c943024e02a7fc87cbf2c7d1bd'
+secret <- 'abaa4cc4c64c4b7aa1214753b5cda04d'
+Sys.setenv(SPOTIFY_CLIENT_ID = id)
+Sys.setenv(SPOTIFY_CLIENT_SECRET = secret)
+access_token <- get_spotify_access_token()
+```
+
+```{r}
+# Some Spotify Constants
+tame_id <- "5INjqkS1o8h1imAzPqGZBb"
+```
+
+
+```{r}
+tame_artist_catalog_data <- get_artist(tame_id)
+tame_album_artist_data <- get_artist_albums(tame_id, 
+                                            include_groups = c("album"))
+tame_feature_data <- get_artist_audio_features(artist = tame_id, 
+                                  authorization = get_spotify_access_token(), 
+                                  include_groups = c("album"))
+```
+
+```{r}
+currents_data <- get_album_tracks("79dL7FLiJFOO0EoehUHQBv", 
+                                  authorization = access_token)
+
+the_slow_rush_data <- get_album_tracks("31qVWUdRrlb8thMvts0yYL")
+                                       
+```
+
