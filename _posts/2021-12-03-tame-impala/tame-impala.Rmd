@@ -26,9 +26,10 @@ library(tidyverse)
 #setup
 id <- '858051c943024e02a7fc87cbf2c7d1bd'
 secret <- 'abaa4cc4c64c4b7aa1214753b5cda04d'
-Sys.setenv(SPOTIFY_CLIENT_ID = id)
-Sys.setenv(SPOTIFY_CLIENT_SECRET = secret)
-access_token <- get_spotify_access_token()
+SPOTIFY_CLIENT_ID = id
+SPOTIFY_CLIENT_SECRET = secret
+access_token <- get_spotify_access_token(client_id = Sys.getenv('858051c943024e02a7fc87cbf2c7d1bd'),
+                                         client_secret = Sys.getenv('abaa4cc4c64c4b7aa1214753b5cda04d'))
 ```
 
 ```{r}
@@ -41,9 +42,18 @@ tame_id <- "5INjqkS1o8h1imAzPqGZBb"
 tame_artist_catalog_data <- get_artist(tame_id)
 tame_album_artist_data <- get_artist_albums(tame_id, 
                                             include_groups = c("album"))
+```
+
+
+```{r}
+# Feature data for all songs as of 12/4/2021
 tame_feature_data <- get_artist_audio_features(artist = tame_id, 
                                   authorization = get_spotify_access_token(), 
                                   include_groups = c("album"))
+
+# Below does not return artist lyric information for some reason.
+# tame_discography <- get_discography(artist = "tame impala", 
+#                                   authorization = get_spotify_access_token())
 ```
 
 ```{r}
@@ -54,3 +64,28 @@ the_slow_rush_data <- get_album_tracks("31qVWUdRrlb8thMvts0yYL")
                                        
 ```
 
+```{r}
+# top track data, default is in the US, can call other countries by other ID's
+top_tracks <- get_artist_top_tracks(tame_id)
+```
+
+
+```{r}
+# Getting my data
+my_profile <- get_my_profile(authorization = get_spotify_authorization_code())
+
+my_top_artists <- get_my_top_artists_or_tracks(type = "artists", 
+                                               time_range = "long_term",
+                                               authorization = get_spotify_access_token(client_id = ))
+```
+
+
+# Some possible ways to disect music:
+* speechiness across albums
+* Danceability = “Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.”
+* Valence = “A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).”
+* Energy = “Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.”
+* Sentiment analysis
+
+* Compare my most played tame songs to various factors
+* Sonic scroe from tayloR post
