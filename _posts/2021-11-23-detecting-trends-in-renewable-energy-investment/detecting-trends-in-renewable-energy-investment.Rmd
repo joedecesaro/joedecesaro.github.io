@@ -5,13 +5,13 @@ description: |
 author: Joe DeCesaro
 date: 12-01-2021
 output:
+  html_document:
+    toc: yes
+    df_print: paged
   distill::distill_article:
     toc: yes
     code_folding: yes
     self_contained: false
-  html_document:
-    toc: yes
-    df_print: paged
   pdf_document:
     toc: yes
 preview: images/Regional_Regression.png
