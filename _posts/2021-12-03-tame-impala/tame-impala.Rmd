@@ -24,12 +24,12 @@ library(tidyverse)
 
 ```{r, include = FALSE}
 #setup
-id <- '858051c943024e02a7fc87cbf2c7d1bd'
-secret <- 'abaa4cc4c64c4b7aa1214753b5cda04d'
+id <- "858051c943024e02a7fc87cbf2c7d1bd"
+secret <- "abaa4cc4c64c4b7aa1214753b5cda04d"
 SPOTIFY_CLIENT_ID = id
 SPOTIFY_CLIENT_SECRET = secret
-access_token <- get_spotify_access_token(client_id = Sys.getenv('858051c943024e02a7fc87cbf2c7d1bd'),
-                                         client_secret = Sys.getenv('abaa4cc4c64c4b7aa1214753b5cda04d'))
+access_token <- get_spotify_access_token(client_id = Sys.getenv("SPOTIFY_CLIENT_ID"), client_secret = Sys.getenv("SPOTIFY_CLIENT_SECRET"))
+authorization <- get_spotify_authorization_code(client_id = Sys.getenv("SPOTIFY_CLIENT_ID"), client_secret = Sys.getenv("SPOTIFY_CLIENT_SECRET"))
 ```
 
 ```{r}
@@ -76,7 +76,10 @@ my_profile <- get_my_profile(authorization = get_spotify_authorization_code())
 
 my_top_artists <- get_my_top_artists_or_tracks(type = "artists", 
                                                time_range = "long_term",
-                                               authorization = get_spotify_access_token(client_id = ))
+                                               authorization = authorization)
+my_top_tracks <- get_my_top_artists_or_tracks(type = "tracks", 
+                                               time_range = "long_term",
+                                               authorization = authorization)
 ```
 
 
