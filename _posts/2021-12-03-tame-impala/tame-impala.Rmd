@@ -28,8 +28,9 @@ id <- "858051c943024e02a7fc87cbf2c7d1bd"
 secret <- "abaa4cc4c64c4b7aa1214753b5cda04d"
 SPOTIFY_CLIENT_ID = id
 SPOTIFY_CLIENT_SECRET = secret
-access_token <- get_spotify_access_token(client_id = Sys.getenv("SPOTIFY_CLIENT_ID"), client_secret = Sys.getenv("SPOTIFY_CLIENT_SECRET"))
-authorization <- get_spotify_authorization_code(client_id = Sys.getenv("SPOTIFY_CLIENT_ID"), client_secret = Sys.getenv("SPOTIFY_CLIENT_SECRET"))
+access_token <- get_spotify_access_token(client_id = Sys.getenv("SPOTIFY_CLIENT_ID"),
+                                         client_secret = Sys.getenv("SPOTIFY_CLIENT_SECRET"))
+# authorization <- get_spotify_authorization_code(client_id = Sys.getenv("SPOTIFY_CLIENT_ID"), client_secret = Sys.getenv("SPOTIFY_CLIENT_SECRET"))
 ```
 
 ```{r}
