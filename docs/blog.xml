@@ -18,10 +18,10 @@
       <media:content url="https://joedecesaro.github.io/posts/2021-11-23-detecting-trends-in-renewable-energy-investment/images/Regional_Regression.png" medium="image" type="image/png" width="3000" height="2100"/>
     </item>
     <item>
-      <title>The ggplot() Function</title>
+      <title>The Basics of the ggplot() Function</title>
       <dc:creator>Joe DeCesaro</dc:creator>
       <link>https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned</link>
-      <description>A short summary of the `ggplot()` function within the tidyverse library.</description>
+      <description>A short introduction to the `ggplot()` function within the tidyverse library.</description>
       <guid>https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned</guid>
       <pubDate>Tue, 10 Aug 2021 00:00:00 +0000</pubDate>
       <media:content url="https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/images/ggplot_ex.png" medium="image" type="image/png" width="1400" height="865"/>

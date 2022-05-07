@@ -86,9 +86,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Joe DeCesaro: The ggplot() Function</title>
+<title>Joe DeCesaro: The Basics of the ggplot() Function</title>
 
-<meta property="description" itemprop="description" content="A short summary of the `ggplot()` function within the tidyverse library."/>
+<meta property="description" itemprop="description" content="A short introduction to the `ggplot()` function within the tidyverse library."/>
 
 <link rel="canonical" href="https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/"/>
 
@@ -98,9 +98,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta name="article:author" content="Joe DeCesaro"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Joe DeCesaro: The ggplot() Function"/>
+<meta property="og:title" content="Joe DeCesaro: The Basics of the ggplot() Function"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short summary of the `ggplot()` function within the tidyverse library."/>
+<meta property="og:description" content="A short introduction to the `ggplot()` function within the tidyverse library."/>
 <meta property="og:url" content="https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/"/>
 <meta property="og:image" content="https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/images/ggplot_ex.png"/>
 <meta property="og:image:width" content="1400"/>
@@ -110,15 +110,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Joe DeCesaro: The ggplot() Function"/>
-<meta property="twitter:description" content="A short summary of the `ggplot()` function within the tidyverse library."/>
+<meta property="twitter:title" content="Joe DeCesaro: The Basics of the ggplot() Function"/>
+<meta property="twitter:description" content="A short introduction to the `ggplot()` function within the tidyverse library."/>
 <meta property="twitter:url" content="https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/"/>
 <meta property="twitter:image" content="https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/images/ggplot_ex.png"/>
 <meta property="twitter:image:width" content="1400"/>
 <meta property="twitter:image:height" content="865"/>
 
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
-<meta name="citation_title" content="Joe DeCesaro: The ggplot() Function"/>
+<meta name="citation_title" content="Joe DeCesaro: The Basics of the ggplot() Function"/>
 <meta name="citation_fulltext_html_url" content="https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/"/>
 <meta name="citation_online_date" content="2021/08/10"/>
 <meta name="citation_publication_date" content="2021/08/10"/>
@@ -127,7 +127,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","preview","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["The ggplot() Function"]},{"type":"character","attributes":{},"value":["A short summary of the `ggplot()` function within the tidyverse library."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Joe DeCesaro"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-10-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["images/ggplot_ex.png"]},{"type":"character","attributes":{},"value":["https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/"]},{"type":"character","attributes":{},"value":["https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","preview","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["The Basics of the ggplot() Function"]},{"type":"character","attributes":{},"value":["A short introduction to the `ggplot()` function within the tidyverse library."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Joe DeCesaro"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-10-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["images/ggplot_ex.png"]},{"type":"character","attributes":{},"value":["https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/"]},{"type":"character","attributes":{},"value":["https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2374,7 +2374,7 @@ d-appendix d-footnote-list a.footnote-backlink {
   color: var(--hover-color, white);
 }</style>
 <!--/radix_placeholder_distill-->
-  <script src="../../site_libs/header-attrs-2.9/header-attrs.js"></script>
+  <script src="../../site_libs/header-attrs-2.10/header-attrs.js"></script>
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -2395,7 +2395,7 @@ d-appendix d-footnote-list a.footnote-backlink {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"The ggplot() Function","description":"A short summary of the `ggplot()` function within the tidyverse library.","authors":[{"author":"Joe DeCesaro","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-10T00:00:00.000+00:00","citationText":"DeCesaro, 2021"}
+{"title":"The Basics of the ggplot() Function","description":"A short introduction to the `ggplot()` function within the tidyverse library.","authors":[{"author":"Joe DeCesaro","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-10T00:00:00.000+00:00","citationText":"DeCesaro, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2422,10 +2422,11 @@ d-appendix d-footnote-list a.footnote-backlink {
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>The ggplot() Function</h1>
+<h1>The Basics of the ggplot() Function</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short summary of the <code>ggplot()</code> function within the tidyverse library.</p></p>
+<p><p>A short introduction to the <code>ggplot()</code> function within
+the tidyverse library.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2435,23 +2436,75 @@ d-appendix d-footnote-list a.footnote-backlink {
 </div>
 
 <div class="d-article">
-<h4 id="the-basics-of-the-ggplot-function">The basics of the <code>ggplot()</code> function:</h4>
-<p><code>ggplot()</code> allows for the easy plotting of various types of graphic representations of data frames. These plots can start out as simple but can also be highly complex and customized. Below is an example of a simple point graph of data from the Palmer Penguins data set.</p>
+<h4 id="the-basics-of-the-ggplot-function">The basics of the
+<code>ggplot()</code> function:</h4>
+<p><code>ggplot()</code> allows for the easy plotting of various types
+of graphic representations of data frames. These plots can start out as
+simple but can also be highly complex and customized. Below is an
+example of a simple point graph of data from the Palmer Penguins data
+set.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>penguins</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>flipper_length_mm</span>, y <span class='op'>=</span> <span class='va'>body_mass_g</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
 <p><img src="a-function-i-learned_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
 </div>
-<p>Note that it is critical to specify the type of plot desired after the <code>ggplot()</code> function. Below is an example of using the <code>geom_line()</code> function where above uses the <code>geom_point()</code> function.</p>
+<p>Note that it is critical to specify the type of plot desired after
+the <code>ggplot()</code> function. Below is an example of using the
+<code>geom_line()</code> function where above uses the
+<code>geom_point()</code> function.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>penguins</span>, <span class='fu'>aes</span><span class='op'>(</span> x <span class='op'>=</span> <span class='va'>flipper_length_mm</span>, y <span class='op'>=</span> <span class='va'>body_mass_g</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_line</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
 <p><img src="a-function-i-learned_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
 </div>
-<p>Looking at the scatter plot above (not the line plot) does not provide much useful information from the data set. In data science it is important to call out specific groups within your data. In the Palmer Penguins data, three separate species of penguins are observed. Let’s take a look at how we can separate the data by species within the plot.</p>
+<p>Looking at the scatter plot above (not the line plot) does not
+provide much useful information from the data set. In data science it is
+important to call out specific groups within your data. In the Palmer
+Penguins data, three separate species of penguins are observed. Let’s
+take a look at how we can separate the data by species within the
+plot.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>penguins</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>flipper_length_mm</span>, y <span class='op'>=</span> <span class='va'>body_mass_g</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>species</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
 <p><img src="a-function-i-learned_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
 </div>
-<p>By seperating the data by species we can now clearly draw some distinct conclusions from the data for each species. For example, we know that Gentoo penguins will generally be the largest penguins.</p>
-<p>It is always a good idea to take a look at your data BEFORE you begin working with it. By looking at the <code>penguins</code> data prior to plotting it, I would have known that there were three species within this data set and that I should probably have seperated them in the plot from the beginning.</p>
-<p>This is a very brief introduction to the <code>ggplot()</code> function. Future posts will add to the foundations set in this introduciton.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>By seperating the data by species we can now clearly draw some
+distinct conclusions from the data for each species. For example, we
+know that Gentoo penguins will generally be the largest penguins.</p>
+<p>It is always a good idea to take a look at your data BEFORE you begin
+working with it. By looking at the <code>penguins</code> data prior to
+plotting it, I would have known that there were three species within
+this data set and that I should probably have seperated them in the plot
+from the beginning.</p>
+<p>This is a very brief introduction to the <code>ggplot()</code>
+function. Future posts will add to the foundations set in this
+introduciton.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2466,11 +2519,11 @@ d-appendix d-footnote-list a.footnote-backlink {
 <div class="appendix-bottom">
   <h3 id="citation">Citation</h3>
   <p>For attribution, please cite this work as</p>
-  <pre class="citation-appendix short">DeCesaro (2021, Aug. 10). Joe DeCesaro: The ggplot() Function. Retrieved from https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/</pre>
+  <pre class="citation-appendix short">DeCesaro (2021, Aug. 10). Joe DeCesaro: The Basics of the ggplot() Function. Retrieved from https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/</pre>
   <p>BibTeX citation</p>
   <pre class="citation-appendix long">@misc{decesaro2021the,
   author = {DeCesaro, Joe},
-  title = {Joe DeCesaro: The ggplot() Function},
+  title = {Joe DeCesaro: The Basics of the ggplot() Function},
   url = {https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/},
   year = {2021}
 }</pre>

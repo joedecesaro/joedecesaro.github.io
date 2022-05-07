@@ -9,11 +9,12 @@ date: 08-10-2021
 output:
   distill::distill_article:
     self_contained: false
+    code_folding: yes
 preview: images/ggplot_ex.png
 ---
 
 
-```{r setup, include=FALSE}
+```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(palmerpenguins)
@@ -23,20 +24,20 @@ library(palmerpenguins)
 
 `ggplot()` allows for the easy plotting of various types of graphic representations of data frames. These plots can start out as simple but can also be highly complex and customized. Below is an example of a simple point graph of data from the Palmer Penguins data set.
 
-```{r}
+```{r, include=TRUE}
 ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 ```
 Note that it is critical to specify the type of plot desired after the `ggplot()` function. Below is an example of using the `geom_line()` function where above uses the `geom_point()` function.
 
-```{r}
+```{r, include=TRUE}
 ggplot(data = penguins, aes( x = flipper_length_mm, y = body_mass_g)) +
   geom_line()
 ```
 
 Looking at the scatter plot above (not the line plot) does not provide much useful information from the data set. In data science it is important to call out specific groups within your data. In the Palmer Penguins data, three separate species of penguins are observed. Let's take a look at how we can separate the data by species within the plot.
 
-```{r}
+```{r, include=TRUE}
 ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point(aes(color = species))
 ```
