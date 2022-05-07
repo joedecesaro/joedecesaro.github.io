@@ -10,6 +10,9 @@ output:
   distill::distill_article:
     self_contained: false
     code_folding: yes
+categories:
+  - R 
+  - tidyverse
 preview: images/ggplot_ex.png
 ---
 

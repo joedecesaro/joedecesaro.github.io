@@ -13,6 +13,9 @@
       <dc:creator>Joe DeCesaro</dc:creator>
       <link>https://joedecesaro.github.io/posts/2021-11-23-detecting-trends-in-renewable-energy-investment</link>
       <description>Here I explore the trend in annualized renewable and non-renewable energy investments by different regions around the world. I also test the statistical significance of the findings.</description>
+      <category>Statistics</category>
+      <category>R</category>
+      <category>Renewable Energy</category>
       <guid>https://joedecesaro.github.io/posts/2021-11-23-detecting-trends-in-renewable-energy-investment</guid>
       <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
       <media:content url="https://joedecesaro.github.io/posts/2021-11-23-detecting-trends-in-renewable-energy-investment/images/Regional_Regression.png" medium="image" type="image/png" width="3000" height="2100"/>
@@ -22,6 +25,8 @@
       <dc:creator>Joe DeCesaro</dc:creator>
       <link>https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned</link>
       <description>A short introduction to the `ggplot()` function within the tidyverse library.</description>
+      <category>R</category>
+      <category>tidyverse</category>
       <guid>https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned</guid>
       <pubDate>Tue, 10 Aug 2021 00:00:00 +0000</pubDate>
       <media:content url="https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned/images/ggplot_ex.png" medium="image" type="image/png" width="1400" height="865"/>

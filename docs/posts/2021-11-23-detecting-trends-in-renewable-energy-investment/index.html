@@ -127,7 +127,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","preview","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Regional Trends in Renewable Energy Investment"]},{"type":"character","attributes":{},"value":["Here I explore the trend in annualized renewable and non-renewable energy investments by different regions around the world. I also test the statistical significance of the findings."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Joe DeCesaro"]}]}]},{"type":"character","attributes":{},"value":["12-01-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article","html_document","pdf_document"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","code_folding","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","df_print"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["paged"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["images/Regional_Regression.png"]},{"type":"character","attributes":{},"value":["https://joedecesaro.github.io/posts/2021-11-23-detecting-trends-in-renewable-energy-investment/"]},{"type":"character","attributes":{},"value":["https://joedecesaro.github.io/posts/2021-11-23-detecting-trends-in-renewable-energy-investment/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","categories","preview","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Regional Trends in Renewable Energy Investment"]},{"type":"character","attributes":{},"value":["Here I explore the trend in annualized renewable and non-renewable energy investments by different regions around the world. I also test the statistical significance of the findings."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Joe DeCesaro"]}]}]},{"type":"character","attributes":{},"value":["12-01-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article","html_document","pdf_document"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","code_folding","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","df_print"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["paged"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["Statistics","R","Renewable Energy"]},{"type":"character","attributes":{},"value":["images/Regional_Regression.png"]},{"type":"character","attributes":{},"value":["https://joedecesaro.github.io/posts/2021-11-23-detecting-trends-in-renewable-energy-investment/"]},{"type":"character","attributes":{},"value":["https://joedecesaro.github.io/posts/2021-11-23-detecting-trends-in-renewable-energy-investment/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2426,8 +2426,15 @@ d-appendix d-footnote-list a.footnote-backlink {
 <div class="d-title">
 <h1>Regional Trends in Renewable Energy Investment</h1>
 <!--radix_placeholder_categories-->
+<div class="dt-tags">
+  <a href="../../blog.html#category:Statistics" class="dt-tag">Statistics</a>
+  <a href="../../blog.html#category:R" class="dt-tag">R</a>
+  <a href="../../blog.html#category:Renewable_Energy" class="dt-tag">Renewable Energy</a>
+</div>
 <!--/radix_placeholder_categories-->
-<p><p>Here I explore the trend in annualized renewable and non-renewable energy investments by different regions around the world. I also test the statistical significance of the findings.</p></p>
+<p><p>Here I explore the trend in annualized renewable and non-renewable
+energy investments by different regions around the world. I also test
+the statistical significance of the findings.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2442,15 +2449,21 @@ d-appendix d-footnote-list a.footnote-backlink {
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#what-is-the-global-trend-of-regional-renewable-energy-investment-over-time">What is the global trend of regional renewable energy investment over time?</a>
+<li><a
+href="#what-is-the-global-trend-of-regional-renewable-energy-investment-over-time">What
+is the global trend of regional renewable energy investment over
+time?</a>
 <ul>
 <li><a href="#data">Data</a></li>
 <li><a href="#analysis-plan">Analysis Plan</a></li>
 <li><a href="#results">Results</a>
 <ul>
-<li><a href="#simple-renewable-investment-trend-model">Simple Renewable Investment Trend Model</a></li>
-<li><a href="#simple-non-renewable-investment-trend-model">Simple Non-renewable Investment Trend Model</a></li>
-<li><a href="#regional-renewable-investment-trend-model">Regional Renewable Investment Trend Model</a></li>
+<li><a href="#simple-renewable-investment-trend-model">Simple Renewable
+Investment Trend Model</a></li>
+<li><a href="#simple-non-renewable-investment-trend-model">Simple
+Non-renewable Investment Trend Model</a></li>
+<li><a href="#regional-renewable-investment-trend-model">Regional
+Renewable Investment Trend Model</a></li>
 </ul></li>
 <li><a href="#next-steps">Next Steps</a></li>
 <li><a href="#references">References</a></li>
@@ -2476,14 +2489,78 @@ Show code
 </div>
 </details>
 </div>
-<h1 id="what-is-the-global-trend-of-regional-renewable-energy-investment-over-time">What is the global trend of regional renewable energy investment over time?</h1>
-<p>Implementation of renewable energy into electric grids around the world will be key to curbing the effects of climate change. Currently, three quarters of global greenhouse gas emissions result from fossil fuel energy production (Ritchie, Roser, 2020). As put by the International Renewable Energy Agency (IRENA), “meeting international climate and development objectives will require a massive re-allocation of capital toward low-carbon technologies, including renewables, and the mobilization of all available capital sources”. In the past, renewable energy technologies such as solar and wind have been expensive forms of generating electricity but, over the last ten years there has been a steep decline in their costs. From 2009 to 2019 the price of electricity from solar power has dropped 89% and the wind has dropped 70% (Roser, 2020). It might seem obvious that renewable portfolios have been growing in recent years as governments and politicians advertise, however does data actually support this? How are investments in renewable technologies changing over time? How does this compare to investment in non-renewable energy?</p>
-<p>As climate change becomes an ever more present and increasing threat, detecting these trends can tell us if the world is on the right track to reducing carbon emissions from energy generation. IRENA dives deep into these questions in its report, “Global Landscape of Renewable Energy Finance 2020” for the time period of 2013-2018. The IRENA report compares investment to climate goals like the Paris Agreement and makes recommendations on how these goals can be met more effectively. It also discusses the sources of the capital for energy projects and dives into off-grid renewable finance. The data used for the analysis in this blog post is from IRENA and the Climate Policy Initiative (CPI) and covers the time period of 2000-2020.</p>
-<p>This blog post will take a more streamlined look at the general investment trend of global regions across time with linear regression models. Using a significance level of 0.05, I aim to detect whether the results from the models are statistically significant. This post is by no means a comprehensive study, however it will provide some quick insights. Some of the limitations of this analysis are discussed in the “Next Steps” section below.</p>
+<h1
+id="what-is-the-global-trend-of-regional-renewable-energy-investment-over-time">What
+is the global trend of regional renewable energy investment over
+time?</h1>
+<p>Implementation of renewable energy into electric grids around the
+world will be key to curbing the effects of climate change. Currently,
+three quarters of global greenhouse gas emissions result from fossil
+fuel energy production (Ritchie, Roser, 2020). As put by the
+International Renewable Energy Agency (IRENA), “meeting international
+climate and development objectives will require a massive re-allocation
+of capital toward low-carbon technologies, including renewables, and the
+mobilization of all available capital sources”. In the past, renewable
+energy technologies such as solar and wind have been expensive forms of
+generating electricity but, over the last ten years there has been a
+steep decline in their costs. From 2009 to 2019 the price of electricity
+from solar power has dropped 89% and the wind has dropped 70% (Roser,
+2020). It might seem obvious that renewable portfolios have been growing
+in recent years as governments and politicians advertise, however does
+data actually support this? How are investments in renewable
+technologies changing over time? How does this compare to investment in
+non-renewable energy?</p>
+<p>As climate change becomes an ever more present and increasing threat,
+detecting these trends can tell us if the world is on the right track to
+reducing carbon emissions from energy generation. IRENA dives deep into
+these questions in its report, “Global Landscape of Renewable Energy
+Finance 2020” for the time period of 2013-2018. The IRENA report
+compares investment to climate goals like the Paris Agreement and makes
+recommendations on how these goals can be met more effectively. It also
+discusses the sources of the capital for energy projects and dives into
+off-grid renewable finance. The data used for the analysis in this blog
+post is from IRENA and the Climate Policy Initiative (CPI) and covers
+the time period of 2000-2020.</p>
+<p>This blog post will take a more streamlined look at the general
+investment trend of global regions across time with linear regression
+models. Using a significance level of 0.05, I aim to detect whether the
+results from the models are statistically significant. This post is by
+no means a comprehensive study, however it will provide some quick
+insights. Some of the limitations of this analysis are discussed in the
+“Next Steps” section below.</p>
 <h2 id="data">Data</h2>
-<p>IRENA provides the data used in its 2020 finance report available for download from its website in an excel file format. To accompany the data, IRENA also posts a “methodology” document that discusses its sources and how its analysis was conducted. According to the methodology report, the data used in this blog post can be, “freely, used, shared, copied, reproduced, printed and/or stored.” It should be noted that all the data from my analysis in this post is from IRENA and they hold the copyright for it.</p>
-<p>Financial data can be challenging to acquire and can cause some misclassifications of recipients however, IRENA has standardized this process to the greatest extent possible for these data. Private investment information can be particularly challenging to find and these date are primarily taken from the Bloomberg New Energy Finance database by IRENA. While, the data used in this analysis may not be comprehensive for all financial investment data, it is likely some of the most comprehensive that is freely available. The reported investment data are conservative according to the methodologies provided by IRENA to prevent “double-counts” as they state “under-reporting of renewable investments is preferred to over-reporting.” The methodology report also provides detailed information about data sources, regional breakdowns, and more. The IRENA 2020 report and its methodologies are fully referenced below.</p>
-<p>The raw data from IRENA are broken down by individual project investments in renewable and non-renewable energy sources with the amount of the investment in million USD. For each individual investment there is a plethora of data available including the year, country, region, donor, technology, and more. The time frame of data available from this data is from 2000-2020 This blog post will use annualized totals of investment for global regions and therefore does not have a seasonal component. The countries represented in regional breakdowns were not determined by the author of this post and is directly embedded from these IRENA data.</p>
+<p>IRENA provides the data used in its 2020 finance report available for
+download from its website in an excel file format. To accompany the
+data, IRENA also posts a “methodology” document that discusses its
+sources and how its analysis was conducted. According to the methodology
+report, the data used in this blog post can be, “freely, used, shared,
+copied, reproduced, printed and/or stored.” It should be noted that all
+the data from my analysis in this post is from IRENA and they hold the
+copyright for it.</p>
+<p>Financial data can be challenging to acquire and can cause some
+misclassifications of recipients however, IRENA has standardized this
+process to the greatest extent possible for these data. Private
+investment information can be particularly challenging to find and these
+date are primarily taken from the Bloomberg New Energy Finance database
+by IRENA. While, the data used in this analysis may not be comprehensive
+for all financial investment data, it is likely some of the most
+comprehensive that is freely available. The reported investment data are
+conservative according to the methodologies provided by IRENA to prevent
+“double-counts” as they state “under-reporting of renewable investments
+is preferred to over-reporting.” The methodology report also provides
+detailed information about data sources, regional breakdowns, and more.
+The IRENA 2020 report and its methodologies are fully referenced
+below.</p>
+<p>The raw data from IRENA are broken down by individual project
+investments in renewable and non-renewable energy sources with the
+amount of the investment in million USD. For each individual investment
+there is a plethora of data available including the year, country,
+region, donor, technology, and more. The time frame of data available
+from this data is from 2000-2020 This blog post will use annualized
+totals of investment for global regions and therefore does not have a
+seasonal component. The countries represented in regional breakdowns
+were not determined by the author of this post and is directly embedded
+from these IRENA data.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2562,12 +2639,43 @@ Show code
 </details>
 </div>
 <h2 id="analysis-plan">Analysis Plan</h2>
-<p>First, a simple static time series model will explore the trend of the total annual amount invested in renewable energy by region across time. Regions are broken into Africa, Asia, Central America and the Caribbean, Eurasia, Europe, Middle East, Oceania, and South America. By running this simple model I aim to get a quick glimpse into the global trend of renewable investment over time, if one exists. This assumes that only the immediate year in question has an effect on the quantity of investment. This will then be compared to the trend in non-renewable energy source investment over the same time period. As previously mentioned, a significance level of 0.05 will be used to determine statistical significance. The null hypothesis for this first regression is that there is no relationship of annual renewable energy investment by regions over time.</p>
-<p>Second, a more complex time series regression model will be produced where the primary simple regression model is broken up by regional heterogeneity to produce an interaction regression model. The first trend regression model provides a quick insight into how the world is investing as a whole based on regional sums for each year. However, it is evident with accords like The Paris Agreement it will take each country’s and region’s participation to minimize and eventually reverse the effects of climate change. With this in mind, the first regression model hides that certain regions are committing greater investments over time than other regions.</p>
-<p>If regions are truly committed to curbing climate change the second regression model will show an overall positive trend. This evaluation will serve as a litmus test to observe regional commitment to global climate agreements. The same significance level will be used to test the null hypothesis that, within each region, there is no change of renewable investment rate over time. Finally, regional renewable trends will then be compared to their non-renewable counterparts.</p>
+<p>First, a simple static time series model will explore the trend of
+the total annual amount invested in renewable energy by region across
+time. Regions are broken into Africa, Asia, Central America and the
+Caribbean, Eurasia, Europe, Middle East, Oceania, and South America. By
+running this simple model I aim to get a quick glimpse into the global
+trend of renewable investment over time, if one exists. This assumes
+that only the immediate year in question has an effect on the quantity
+of investment. This will then be compared to the trend in non-renewable
+energy source investment over the same time period. As previously
+mentioned, a significance level of 0.05 will be used to determine
+statistical significance. The null hypothesis for this first regression
+is that there is no relationship of annual renewable energy investment
+by regions over time.</p>
+<p>Second, a more complex time series regression model will be produced
+where the primary simple regression model is broken up by regional
+heterogeneity to produce an interaction regression model. The first
+trend regression model provides a quick insight into how the world is
+investing as a whole based on regional sums for each year. However, it
+is evident with accords like The Paris Agreement it will take each
+country’s and region’s participation to minimize and eventually reverse
+the effects of climate change. With this in mind, the first regression
+model hides that certain regions are committing greater investments over
+time than other regions.</p>
+<p>If regions are truly committed to curbing climate change the second
+regression model will show an overall positive trend. This evaluation
+will serve as a litmus test to observe regional commitment to global
+climate agreements. The same significance level will be used to test the
+null hypothesis that, within each region, there is no change of
+renewable investment rate over time. Finally, regional renewable trends
+will then be compared to their non-renewable counterparts.</p>
 <h2 id="results">Results</h2>
-<h3 id="simple-renewable-investment-trend-model">Simple Renewable Investment Trend Model</h3>
-<p>Below is the result of the regression model that tests the effect of year on renewable investment. The output below is from the <code>summary()</code> function, which quickly provides summary statistics in R.</p>
+<h3 id="simple-renewable-investment-trend-model">Simple Renewable
+Investment Trend Model</h3>
+<p>Below is the result of the regression model that tests the effect of
+year on renewable investment. The output below is from the
+<code>summary()</code> function, which quickly provides summary
+statistics in R.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2601,10 +2709,30 @@ Residual standard error: 2167 on 184 degrees of freedom
 Multiple R-squared:  0.1341,    Adjusted R-squared:  0.1294 
 F-statistic:  28.5 on 1 and 184 DF,  p-value: 2.735e-07</code></pre>
 </div>
-<p>Using the <code>summary()</code> function, we can quickly get some insights from the regression model. From the output above the coefficient estimate of the year tells us the annual rate of change of investment with each increasing year for global regions. From the regression model, this is 141.88 million USD. This tells us that, according to this model, with each passing year we are seeing a increase in renewable investment by 142,000,000 USD across each region per year. Overall this is a positive trend for renewable investments year over year.</p>
-<p>From the <code>summary()</code> function the p-value is represented in the “Coefficients” section of the table under “Pr(&gt;|t|)”. The year coefficient has a p-value below 0.001 which allows rejection of a null hypothesis that there is no relationship between annual renewable investment sums across time with a significance level of 0.05. It should be noted that our R-squared value for this model is 0.13 however that is not vital for this analysis as it is not focused on predicting outcomes of investment with high precision, but rather the overall trend from the year coefficient and its’ associated p-value.</p>
-<p>With the information above, I believe the originally proposed question is answered and these data support that there is a positive rate of investment in renewable projects over time. Now lets compare that to non-renewables.</p>
-<h3 id="simple-non-renewable-investment-trend-model">Simple Non-renewable Investment Trend Model</h3>
+<p>Using the <code>summary()</code> function, we can quickly get some
+insights from the regression model. From the output above the
+coefficient estimate of the year tells us the annual rate of change of
+investment with each increasing year for global regions. From the
+regression model, this is 141.88 million USD. This tells us that,
+according to this model, with each passing year we are seeing a increase
+in renewable investment by 142,000,000 USD across each region per year.
+Overall this is a positive trend for renewable investments year over
+year.</p>
+<p>From the <code>summary()</code> function the p-value is represented
+in the “Coefficients” section of the table under “Pr(&gt;|t|)”. The year
+coefficient has a p-value below 0.001 which allows rejection of a null
+hypothesis that there is no relationship between annual renewable
+investment sums across time with a significance level of 0.05. It should
+be noted that our R-squared value for this model is 0.13 however that is
+not vital for this analysis as it is not focused on predicting outcomes
+of investment with high precision, but rather the overall trend from the
+year coefficient and its’ associated p-value.</p>
+<p>With the information above, I believe the originally proposed
+question is answered and these data support that there is a positive
+rate of investment in renewable projects over time. Now lets compare
+that to non-renewables.</p>
+<h3 id="simple-non-renewable-investment-trend-model">Simple
+Non-renewable Investment Trend Model</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2638,8 +2766,19 @@ Residual standard error: 2974 on 170 degrees of freedom
 Multiple R-squared:  0.04507,   Adjusted R-squared:  0.03945 
 F-statistic: 8.023 on 1 and 170 DF,  p-value: 0.005176</code></pre>
 </div>
-<p>From the <code>summary()</code> of this model, there is also a positive trend of non-renewable investment across regions. There is an annual increase in non-renewable investments by 109.54 million USD. With a p-value of 0.005 a null hypothesis can be rejected that there is no relationship between annual non-renewable investment over time with a significance level of 0.05.</p>
-<p>According to these two simple models, there is a larger increase in renewable investments year over year in this 20-year time period compared to non-renewables but as the standard errors for the models overlap this observation is not conclusive and this blog post will not be pursuing this question. Below is a plot that compares renewable and non-renewable investments over time, along with their respective models.</p>
+<p>From the <code>summary()</code> of this model, there is also a
+positive trend of non-renewable investment across regions. There is an
+annual increase in non-renewable investments by 109.54 million USD. With
+a p-value of 0.005 a null hypothesis can be rejected that there is no
+relationship between annual non-renewable investment over time with a
+significance level of 0.05.</p>
+<p>According to these two simple models, there is a larger increase in
+renewable investments year over year in this 20-year time period
+compared to non-renewables but as the standard errors for the models
+overlap this observation is not conclusive and this blog post will not
+be pursuing this question. Below is a plot that compares renewable and
+non-renewable investments over time, along with their respective
+models.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2672,9 +2811,29 @@ Show code
 </details>
 <p><img src="detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
 </div>
-<p>It can be observed from the graph that there has been significant investment in renewable (green) and non-renewable (tan) energy projects since the 2008 global recession. The plot illustrates just how much variance there is in investment totals across regions in each year. As discussed above, the plot shows that there is a larger investment rate in renewables year-over-year. As this data is only from the years 2000-2020 these investment trends do not reflect the historical investments in non-renewable energy sources. As this simple regression only looks at the trend over time I will now investigate how these investment trends compare across separate regions.</p>
-<h3 id="regional-renewable-investment-trend-model">Regional Renewable Investment Trend Model</h3>
-<p>For the regional renewable investment interaction regression model, the same <code>summary()</code> function is used to calculate coefficients and summary statistics. While the <code>summary()</code> function is useful, its’ output can be quite messy with interaction models; the table below is from the <code>summary()</code> results and includes the annual investment rates for different regions and their corresponding p-values. In the regression model, the North America region was set as the base level of the regression. This was done because North America contains the United States, the country with the largest GDP in the world and therefore a significant marker to compare against other regions.</p>
+<p>It can be observed from the graph that there has been significant
+investment in renewable (green) and non-renewable (tan) energy projects
+since the 2008 global recession. The plot illustrates just how much
+variance there is in investment totals across regions in each year. As
+discussed above, the plot shows that there is a larger investment rate
+in renewables year-over-year. As this data is only from the years
+2000-2020 these investment trends do not reflect the historical
+investments in non-renewable energy sources. As this simple regression
+only looks at the trend over time I will now investigate how these
+investment trends compare across separate regions.</p>
+<h3 id="regional-renewable-investment-trend-model">Regional Renewable
+Investment Trend Model</h3>
+<p>For the regional renewable investment interaction regression model,
+the same <code>summary()</code> function is used to calculate
+coefficients and summary statistics. While the <code>summary()</code>
+function is useful, its’ output can be quite messy with interaction
+models; the table below is from the <code>summary()</code> results and
+includes the annual investment rates for different regions and their
+corresponding p-values. In the regression model, the North America
+region was set as the base level of the regression. This was done
+because North America contains the United States, the country with the
+largest GDP in the world and therefore a significant marker to compare
+against other regions.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2853,8 +3012,24 @@ South America
 </tbody>
 </table>
 </div>
-<p>The annual investment rate of each region according to this linear regression interaction model is available in the table. The regions with the two highest annual investment rates over time are Europe and Africa. Europe has widely been seen as a leader in renewable energy development and this is confirmed by the regression model. From IRENA’s raw data, Africa’s renewable energy investment has been particularly high in hydropower throughout various countries. The regions with the two lowest investment rates over time are Oceania and the Middle East. Oceania is primarily made up of island nations with low populations so large investments in these technologies can be challenging. The Middle East produces large quantities of the world’s fossil fuels so its lack of investment is not surprising.</p>
-<p>The only regions with p-values below a significance level of 0.05 are Africa, Asia, Europe, and South America. Therefore, for these regions we can reject the null hypothesis that there is no relationship for the region’s annual investment in renewables over time. Below is a plot that shows the regional model and the renewable investment rates over time separated by region.</p>
+<p>The annual investment rate of each region according to this linear
+regression interaction model is available in the table. The regions with
+the two highest annual investment rates over time are Europe and Africa.
+Europe has widely been seen as a leader in renewable energy development
+and this is confirmed by the regression model. From IRENA’s raw data,
+Africa’s renewable energy investment has been particularly high in
+hydropower throughout various countries. The regions with the two lowest
+investment rates over time are Oceania and the Middle East. Oceania is
+primarily made up of island nations with low populations so large
+investments in these technologies can be challenging. The Middle East
+produces large quantities of the world’s fossil fuels so its lack of
+investment is not surprising.</p>
+<p>The only regions with p-values below a significance level of 0.05 are
+Africa, Asia, Europe, and South America. Therefore, for these regions we
+can reject the null hypothesis that there is no relationship for the
+region’s annual investment in renewables over time. Below is a plot that
+shows the regional model and the renewable investment rates over time
+separated by region.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2882,8 +3057,15 @@ Show code
 </details>
 <p><img src="detecting-trends-in-renewable-energy-investment_files/figure-html5/unnamed-chunk-11-1.png" width="624" /></p>
 </div>
-<p>The graphic clearly defines two different annual investment rate categories for global regions, a high investment rate group and a low investment rate group. The high rate investment group contains Europe, Africa,South America, and Asia. The low rate of investment group contains North America, Central America and the Caribbean, Eurasia, the Middle East, and Oceania.</p>
-<p>Based on the regional interaction regression model above, I do the same for non-renewable energy investment and summarize both models into one output table.</p>
+<p>The graphic clearly defines two different annual investment rate
+categories for global regions, a high investment rate group and a low
+investment rate group. The high rate investment group contains Europe,
+Africa,South America, and Asia. The low rate of investment group
+contains North America, Central America and the Caribbean, Eurasia, the
+Middle East, and Oceania.</p>
+<p>Based on the regional interaction regression model above, I do the
+same for non-renewable energy investment and summarize both models into
+one output table.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -3130,18 +3312,65 @@ South America
 </tbody>
 </table>
 </div>
-<p>The above table allows for the comparison of the annual rates of renewable and non-renewable investment over time by each region and their corresponding p-values. The non-renewable regression model has no investment rate p-value below a significance level of 0.05. Therefore no non-renewable investment rate can be considered statistically significant. For renewables, the investment rates for Africa, Asia, Europe, and South America can be considered statistically significant as their p-values are below a significance level of 0.05.</p>
-<p>Some interesting regional insights from this table however show that South America, Africa, and Asia are investing heavily in renewable and non-renewable energies over time. These regions have economies that are developing rapidly compared to other regions of the world and it is evident in these investment trends. According to the regression models, Europe has been investing the most in renewables compared to other regions year-over-year but not in non-renewables. However, as mentioned earlier no non-renewable investment rates can be considered statistically significant so it is difficult to comment on non-renewable trends as they may not exist.</p>
-<p>To summarize, the world as a whole is investing more in renewable energy projects each year. However, the world is also investing more in non-renewable energy projects each year. By region, only the annual investment rates for Africa, Asia, Europe, and South America can be considered statistically significant as their p-values are below a significance level of 0.05. For other regions, the regression model fails to reject the null hypothesis that there is no relationship with investment in renewable projects over time.</p>
+<p>The above table allows for the comparison of the annual rates of
+renewable and non-renewable investment over time by each region and
+their corresponding p-values. The non-renewable regression model has no
+investment rate p-value below a significance level of 0.05. Therefore no
+non-renewable investment rate can be considered statistically
+significant. For renewables, the investment rates for Africa, Asia,
+Europe, and South America can be considered statistically significant as
+their p-values are below a significance level of 0.05.</p>
+<p>Some interesting regional insights from this table however show that
+South America, Africa, and Asia are investing heavily in renewable and
+non-renewable energies over time. These regions have economies that are
+developing rapidly compared to other regions of the world and it is
+evident in these investment trends. According to the regression models,
+Europe has been investing the most in renewables compared to other
+regions year-over-year but not in non-renewables. However, as mentioned
+earlier no non-renewable investment rates can be considered
+statistically significant so it is difficult to comment on non-renewable
+trends as they may not exist.</p>
+<p>To summarize, the world as a whole is investing more in renewable
+energy projects each year. However, the world is also investing more in
+non-renewable energy projects each year. By region, only the annual
+investment rates for Africa, Asia, Europe, and South America can be
+considered statistically significant as their p-values are below a
+significance level of 0.05. For other regions, the regression model
+fails to reject the null hypothesis that there is no relationship with
+investment in renewable projects over time.</p>
 <h2 id="next-steps">Next Steps</h2>
-<p>This blog post and regression analysis is by no means a comprehensive look at financial investments over time by each region. It provides quick insights into how some regions are investing in renewable technologies at a greater rate over time compared to other regions. There are many factors that can affect a regions total annual investment into renewable energy.</p>
-<p>To dive further into the questions put forward earlier, it would be interesting to normalize investment rates with the GDP of each region. One could also compare specific countries and the affect of the type of government on renewable investment energies. Regional trends can also be greatly affected by a single country’s influence so breaking down this analysis by country would provide further insights. Another option would be to compare the investment rates of countries with rapidly developing economies compared to those who have developed economies to see if there are any relevant trends. As noted before, there is a visual trend in the graphs that much greater investment occurred after the 2008 recession. A deeper analysis could be done to see if this observation is statistical significant and to try and figure out what has caused it.</p>
+<p>This blog post and regression analysis is by no means a comprehensive
+look at financial investments over time by each region. It provides
+quick insights into how some regions are investing in renewable
+technologies at a greater rate over time compared to other regions.
+There are many factors that can affect a regions total annual investment
+into renewable energy.</p>
+<p>To dive further into the questions put forward earlier, it would be
+interesting to normalize investment rates with the GDP of each region.
+One could also compare specific countries and the affect of the type of
+government on renewable investment energies. Regional trends can also be
+greatly affected by a single country’s influence so breaking down this
+analysis by country would provide further insights. Another option would
+be to compare the investment rates of countries with rapidly developing
+economies compared to those who have developed economies to see if there
+are any relevant trends. As noted before, there is a visual trend in the
+graphs that much greater investment occurred after the 2008 recession. A
+deeper analysis could be done to see if this observation is statistical
+significant and to try and figure out what has caused it.</p>
 <h2 id="references">References</h2>
-<p><strong>IRENA, &amp; CPI.</strong> (n.d.-a). Global Landscape of Renewable Energy Finance 2020. 88.</p>
-<p><strong>IRENA, &amp; CPI.</strong> (n.d.-b). Global Landscape of Renewable Energy Finance 2020: Methodology. 16.</p>
-<p><strong>Ritchie, H., &amp; Roser, M.</strong> (2020). Energy. Our World in Data. <a href="https://ourworldindata.org/renewable-energy" class="uri">https://ourworldindata.org/renewable-energy</a></p>
-<p><strong>Roser, M.</strong> (n.d.). Why did renewables become so cheap so fast? Our World in Data. <a href="https://ourworldindata.org/cheap-renewables-growth" class="uri">https://ourworldindata.org/cheap-renewables-growth</a></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p><strong>IRENA, &amp; CPI.</strong> (n.d.-a). Global Landscape of
+Renewable Energy Finance 2020. 88.</p>
+<p><strong>IRENA, &amp; CPI.</strong> (n.d.-b). Global Landscape of
+Renewable Energy Finance 2020: Methodology. 16.</p>
+<p><strong>Ritchie, H., &amp; Roser, M.</strong> (2020). Energy. Our
+World in Data. <a href="https://ourworldindata.org/renewable-energy"
+class="uri">https://ourworldindata.org/renewable-energy</a></p>
+<p><strong>Roser, M.</strong> (n.d.). Why did renewables become so cheap
+so fast? Our World in Data. <a
+href="https://ourworldindata.org/cheap-renewables-growth"
+class="uri">https://ourworldindata.org/cheap-renewables-growth</a></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
