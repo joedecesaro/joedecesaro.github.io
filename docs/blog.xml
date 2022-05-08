@@ -21,6 +21,18 @@
       <media:content url="https://joedecesaro.github.io/posts/2021-11-23-detecting-trends-in-renewable-energy-investment/images/Regional_Regression.png" medium="image" type="image/png" width="3000" height="2100"/>
     </item>
     <item>
+      <title>Houston Blackout Analysis (February 2021)</title>
+      <dc:creator>Joe DeCesaro</dc:creator>
+      <link>https://joedecesaro.github.io/posts/2022-05-07-houston-blackout-analysis</link>
+      <description>Using night light data from NASA's Worldview to identify residences in the Houston metropolitan area that lost power during the major blackout in February 2021.</description>
+      <category>R</category>
+      <category>Spatial Analysis</category>
+      <category>Remote Sensing</category>
+      <guid>https://joedecesaro.github.io/posts/2022-05-07-houston-blackout-analysis</guid>
+      <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://joedecesaro.github.io/posts/2022-05-07-houston-blackout-analysis/images/blackout_map.png" medium="image" type="image/png" width="737" height="469"/>
+    </item>
+    <item>
       <title>The Basics of the ggplot() Function</title>
       <dc:creator>Joe DeCesaro</dc:creator>
       <link>https://joedecesaro.github.io/posts/2021-08-10-a-function-i-learned</link>
