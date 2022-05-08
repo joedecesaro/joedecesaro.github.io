@@ -21,6 +21,17 @@
       <media:content url="https://joedecesaro.github.io/posts/2021-11-23-detecting-trends-in-renewable-energy-investment/images/Regional_Regression.png" medium="image" type="image/png" width="3000" height="2100"/>
     </item>
     <item>
+      <title>Protecting Whales from Ships</title>
+      <dc:creator>Joe DeCesaro</dc:creator>
+      <link>https://joedecesaro.github.io/posts/2022-05-08-protecting-whales-from-ships</link>
+      <description>The goal of this assignment was to create a method to determine the outline of a speed reduction zone and its effect on the local marine traffic for Dominica.</description>
+      <category>Python</category>
+      <category>Spatial Analysis</category>
+      <guid>https://joedecesaro.github.io/posts/2022-05-08-protecting-whales-from-ships</guid>
+      <pubDate>Tue, 16 Nov 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://joedecesaro.github.io/posts/2022-05-08-protecting-whales-from-ships/protection_area.png" medium="image" type="image/png" width="1296" height="1679"/>
+    </item>
+    <item>
       <title>Houston Blackout Analysis (February 2021)</title>
       <dc:creator>Joe DeCesaro</dc:creator>
       <link>https://joedecesaro.github.io/posts/2022-05-07-houston-blackout-analysis</link>
