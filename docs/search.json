@@ -6,14 +6,22 @@
       "description": "Some additional details about the website",
       "author": [],
       "contents": "\n\n\n\n",
+<<<<<<< HEAD
       "last_modified": "2022-05-07T20:34:13-07:00"
+=======
+      "last_modified": "2022-05-07T10:58:42-07:00"
+>>>>>>> 58151e8b146ad86bfbd60e9a4d5b31d4b193a9ee
     },
     {
       "path": "blog.html",
       "title": "My Blog",
       "author": [],
       "contents": "\n\n\n\n",
+<<<<<<< HEAD
       "last_modified": "2022-05-07T20:34:13-07:00"
+=======
+      "last_modified": "2022-05-07T10:58:42-07:00"
+>>>>>>> 58151e8b146ad86bfbd60e9a4d5b31d4b193a9ee
     },
     {
       "path": "cv.html",
@@ -21,14 +29,22 @@
       "description": "Below is a generalized version of my professional work history.",
       "author": [],
       "contents": "\nDownload the below Resume\nhere\n\n\n\n\n\n\n",
+<<<<<<< HEAD
       "last_modified": "2022-05-07T20:34:14-07:00"
+=======
+      "last_modified": "2022-05-07T10:58:43-07:00"
+>>>>>>> 58151e8b146ad86bfbd60e9a4d5b31d4b193a9ee
     },
     {
       "path": "index.html",
       "title": "Joe DeCesaro",
       "author": [],
       "contents": "\n\n          \n          \n          Joe DeCesaro\n          \n          \n          Home\n          Resume\n          Blog\n          \n          \n          \n          ☰\n          \n          \n      \n        \n          \n            \n              \n            \n              Joe DeCesaro\n            \n            \n              \n                \n                    \n                      \n                        LinkedIn\n                      \n                    \n                  \n                                    \n                    \n                      \n                        GitHub\n                      \n                    \n                  \n                                    \n                    \n                      \n                        Email\n                      \n                    \n                  \n                                  \n            \n          \n        \n        \n        \n          \n            I am currently pursuing a Master’s Degree in\n            Environmental Data Science (EDS) at the Bren School of\n            Environmental Sciences and Management UC Santa Barbara. I\n            hold a Bachelor’s Degree in Materials Engineering from Cal\n            Poly – San Luis Obispo.\n            Having always enjoyed spending time in the outdoors I\n            want my career to focus on environmental work. After\n            graduating in 2018, I worked as an environmental engineer\n            consultant at Ashworth Leininger Group. My work mostly\n            focused on environmental compliance for a variety of\n            manufacturing facilities or building operations. Some of\n            these projects included air permitting work in various\n            California air districts, onsite hazardous waste and\n            materials management, and writing Spill Prevention,\n            Countermeasure, and Control (SPCC) Plans. One project\n            investigated the reduction of carbon emissions by shifting\n            away from natural gas through electrification of an energy\n            intensive manufacturing process and significantly grew my\n            interest in data science. With the completion of my Master’s\n            program, I want to use data science to improve renewable\n            energy development and implementation both in the United\n            States and internationally.\n          \n        \n      \n    \n\n    \n      \n        \n          \n            \n              \n            \n              Joe DeCesaro\n            \n            \n              \n                \n                                    \n                    \n                      LinkedIn\n                    \n                  \n                                    \n                    \n                      GitHub\n                    \n                  \n                                    \n                    \n                      Email\n                    \n                  \n                                  \n              \n            \n            \n              I am currently pursuing a Master’s Degree in\n              Environmental Data Science (EDS) at the Bren School of\n              Environmental Sciences and Management UC Santa Barbara. I\n              hold a Bachelor’s Degree in Materials Engineering from Cal\n              Poly – San Luis Obispo.\n              Having always enjoyed spending time in the outdoors I\n              want my career to focus on environmental work. After\n              graduating in 2018, I worked as an environmental engineer\n              consultant at Ashworth Leininger Group. My work mostly\n              focused on environmental compliance for a variety of\n              manufacturing facilities or building operations. Some of\n              these projects included air permitting work in various\n              California air districts, onsite hazardous waste and\n              materials management, and writing Spill Prevention,\n              Countermeasure, and Control (SPCC) Plans. One project\n              investigated the reduction of carbon emissions by shifting\n              away from natural gas through electrification of an energy\n              intensive manufacturing process and significantly grew my\n              interest in data science. With the completion of my\n              Master’s program, I want to use data science to improve\n              renewable energy development and implementation both in\n              the United States and internationally.\n            \n        \n      \n    \n\n    \n    \n    ",
+<<<<<<< HEAD
       "last_modified": "2022-05-07T20:34:15-07:00"
+=======
+      "last_modified": "2022-05-07T10:58:43-07:00"
+>>>>>>> 58151e8b146ad86bfbd60e9a4d5b31d4b193a9ee
     }
   ],
   "collections": ["posts/posts.json"]
