@@ -7,7 +7,19 @@
     <description>My Website
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Potential Wind Power in Iowa</title>
+      <dc:creator>Joe DeCesaro</dc:creator>
+      <link>https://joedecesaro.github.io/posts/2022-05-09-potential-wind-power-in-iowa</link>
+      <description>For our spatial analysis class we were asked to evaluate the maximum potential annual wind energy production available to the state of Iowa for two possible siting scenarios.</description>
+      <category>Python</category>
+      <category>Spatial Analysis</category>
+      <category>Remote Sensing</category>
+      <category>SQL</category>
+      <guid>https://joedecesaro.github.io/posts/2022-05-09-potential-wind-power-in-iowa</guid>
+      <pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Regional Trends in Renewable Energy Investment</title>
       <dc:creator>Joe DeCesaro</dc:creator>
